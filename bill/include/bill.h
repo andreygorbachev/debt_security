@@ -28,8 +28,62 @@
 namespace bill
 {
 
+	template<typename T>
 	class bill
 	{
+
+	public:
+
+		explicit bill(
+			std::chrono::year_month_day issue_date,
+			std::chrono::year_month_day maturity_date, // or should these 2 be captured as a georgian::period?
+			T face = 100
+		) noexcept;
+
+	public:
+
+		auto get_issue_date() const noexcept -> const std::chrono::year_month_day&;
+		auto get_maturity_date() const noexcept -> const std::chrono::year_month_day&;
+		auto get_face() const noexcept -> const T&;
+
+	private:
+
+		std::chrono::year_month_day issue_date_{};
+		std::chrono::year_month_day maturity_date_{};
+		T face_{};
+
 	};
+
+
+	template<typename T>
+	bill<T>::bill(
+		std::chrono::year_month_day issue_date,
+		std::chrono::year_month_day maturity_date,
+		T face
+	) noexcept :
+		issue_date_{ issue_date },
+		maturity_date_{ maturity_date },
+		face_{ face }
+	{
+	}
+
+
+	template<typename T>
+	auto bill<T>::get_issue_date() const noexcept -> const std::chrono::year_month_day&
+	{
+		return issue_date_;
+	}
+
+	template<typename T>
+	auto bill<T>::get_maturity_date() const noexcept -> const std::chrono::year_month_day&
+	{
+		return maturity_date_;
+	}
+
+	template<typename T>
+	auto bill<T>::get_face() const noexcept -> const T&
+	{
+		return face_;
+	}
 
 }

@@ -25,13 +25,22 @@
 #include <gtest/gtest.h>
 
 using namespace std;
+using namespace std::chrono;
 
 
 namespace bill
 {
 
-	TEST(bill, test1)
+	TEST(bill, constructor1)
 	{
+		const auto issue_date = std::chrono::year_month_day{ 2025y / January / 1d };
+		const auto maturity_date = std::chrono::year_month_day{ 2025y / February / 1d };
+		const auto face = 100.0;
+		const auto b = bill{ issue_date, maturity_date, face };
+
+		EXPECT_EQ(b.get_issue_date(), issue_date);
+		EXPECT_EQ(b.get_maturity_date(), maturity_date);
+		EXPECT_EQ(b.get_face(), face);
 	}
 
 }
