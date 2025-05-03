@@ -23,6 +23,7 @@
 #pragma once
 
 #include <chrono>
+#include <utility>
 
 #include <cash_flow.h>
 
@@ -67,9 +68,9 @@ namespace bill
 		std::chrono::year_month_day maturity_date,
 		T face
 	) noexcept :
-		issue_date_{ issue_date },
-		maturity_date_{ maturity_date },
-		face_{ face }
+		issue_date_{ std::move(issue_date) },
+		maturity_date_{ std::move(maturity_date) },
+		face_{ std::move(face) }
 	{
 	}
 
