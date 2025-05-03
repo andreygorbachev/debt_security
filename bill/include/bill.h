@@ -51,7 +51,7 @@ namespace bill
 
 	public:
 
-		auto cashflow() const -> cash_flow::cash_flow<T>;
+		auto cashflow() const -> cash_flow::cash_flow<T>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
 
 	private:
 
