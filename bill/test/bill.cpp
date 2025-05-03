@@ -43,4 +43,17 @@ namespace bill
 		EXPECT_EQ(b.get_face(), face);
 	}
 
+	TEST(bill, cashflow1)
+	{
+		const auto issue_date = std::chrono::year_month_day{ 2025y / January / 1d };
+		const auto maturity_date = std::chrono::year_month_day{ 2025y / February / 1d };
+		const auto face = 100.0;
+		const auto b = bill{ issue_date, maturity_date, face };
+
+		const auto cf = b.cashflow();
+
+		EXPECT_EQ(cf.get_date(), maturity_date);
+		EXPECT_EQ(cf.get_flow(), face);
+	}
+
 }

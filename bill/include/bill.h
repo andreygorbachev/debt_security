@@ -24,6 +24,8 @@
 
 #include <chrono>
 
+#include <cash_flow.h>
+
 
 namespace bill
 {
@@ -45,6 +47,10 @@ namespace bill
 		auto get_issue_date() const noexcept -> const std::chrono::year_month_day&;
 		auto get_maturity_date() const noexcept -> const std::chrono::year_month_day&;
 		auto get_face() const noexcept -> const T&;
+
+	public:
+
+		auto cashflow() const -> cash_flow::cash_flow<T>;
 
 	private:
 
@@ -84,6 +90,13 @@ namespace bill
 	auto bill<T>::get_face() const noexcept -> const T&
 	{
 		return face_;
+	}
+
+
+	template<typename T>
+	auto bill<T>::cashflow() const -> cash_flow::cash_flow<T> // do we want to cache this? (and return a const reference?)
+	{
+		return cash_flow::cash_flow<T>{ maturity_date_, face_ }; // should be adjusted for a good payment date
 	}
 
 }

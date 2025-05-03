@@ -6,6 +6,7 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
   bill
+  cash-flow
   GTest::gtest_main
 )
 

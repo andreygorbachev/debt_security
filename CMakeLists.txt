@@ -19,11 +19,11 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(calendar)
 
 FetchContent_Declare(
-  calendar
+  fin-calendar
   GIT_REPOSITORY https://github.com/andreygorbachev/fin-calendar.git
   GIT_TAG        main
 )
-FetchContent_MakeAvailable(calendar)
+FetchContent_MakeAvailable(fin-calendar)
 
 FetchContent_Declare(
   googletest
