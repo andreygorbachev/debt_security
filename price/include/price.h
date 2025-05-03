@@ -30,7 +30,7 @@ namespace price
 {
 
 	template<typename T = double>
-	class price
+	class price final
 	{
 
 	public:
