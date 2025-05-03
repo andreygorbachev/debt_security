@@ -40,7 +40,7 @@ namespace bill
 		explicit bill(
 			std::chrono::year_month_day issue_date,
 			std::chrono::year_month_day maturity_date, // or should these 2 be captured as a georgian::period?
-			T face = 100
+			T face = 100 // do we care for this? (or is it just part of price?) if we do not have it we'll have to have cashflow to be based on a unit notional
 		) noexcept;
 
 	public:
@@ -52,6 +52,7 @@ namespace bill
 	public:
 
 		auto cashflow() const -> cash_flow::cash_flow<T>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
+		// should it be called cash_flow()?
 
 	private:
 
