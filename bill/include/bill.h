@@ -31,7 +31,7 @@
 namespace bill
 {
 
-	template<typename T>
+	template<typename T = double>
 	class bill
 	{
 
