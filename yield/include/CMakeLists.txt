@@ -1,6 +1,7 @@
 project("yield")
 
 add_library(${PROJECT_NAME} INTERFACE
+  ANBIMA.h
   yield.h
 )
 

@@ -1,6 +1,7 @@
 project(yield-test)
 
 add_executable(${PROJECT_NAME}
+  ANBIMA.cpp
   yield.cpp
 )
 
