@@ -22,6 +22,9 @@
 
 #pragma once
 
+#include <bill.h>
+#include <price.h>
+
 #include <chrono>
 #include <utility>
 
@@ -32,6 +35,26 @@ namespace yield
 	template<typename T = double>
 	class ANBIMA final // better name?
 	{
+
+	public:
+
+		auto price(
+			const T& yield,
+			const bill::bill<T>& bill,
+			price::price<T> price // to bring in market conventions
+		) const -> price::price<T>;
+
 	};
+
+
+	template<typename T>
+	auto ANBIMA<T>::price(
+		const T& yield,
+		const bill::bill<T>& bill,
+		price::price<T> price
+	) const -> price::price<T>
+	{
+		return price; // mock up
+	}
 
 }

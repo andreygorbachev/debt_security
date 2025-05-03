@@ -24,9 +24,10 @@
 
 #include <chrono>
 #include <utility>
+#include <variant>
 
 
-namespace yield
+namespace yield // for starters just for bills
 {
 
 	template<typename T = double>
