@@ -27,6 +27,7 @@
 
 #include <calendar.h>
 
+#include <following.h>
 #include <cash_flow.h>
 
 
@@ -111,7 +112,10 @@ namespace bill
 	template<typename T>
 	auto bill<T>::cashflow() const -> cash_flow::cash_flow<T> // do we want to cache this? (and return a const reference?)
 	{
-		return cash_flow::cash_flow<T>{ maturity_date_, face_ }; // should be adjusted for a good payment date
+		const auto f = business_day_convention::following{};
+		const auto payment_date = f.adjust(maturity_date_, cal_);
+
+		return cash_flow::cash_flow<T>{ payment_date, face_ };
 	}
 
 }

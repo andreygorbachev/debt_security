@@ -9,6 +9,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   bill
   cash-flow
   calendar
+  business-day-convention
   GTest::gtest_main
 )
 
