@@ -1,11 +1,17 @@
-project(price-test)
+project(yield-methodology-test)
 
 add_executable(${PROJECT_NAME}
-  price.cpp
+  ANBIMA.cpp
+  yield_methodology.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  price
+  yield-methodology
+  bill
+  quote
+  cash-flow
+  calendar
+  business-day-convention
   GTest::gtest_main
 )
 

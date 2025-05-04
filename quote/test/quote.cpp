@@ -20,42 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include <quote.h>
 
-#include <chrono>
-#include <utility>
-#include <variant>
+#include <gtest/gtest.h>
 
-#include <bill.h>
-#include <price.h>
-
-#include "ANBIMA.h"
+using namespace std;
+using namespace std::chrono;
 
 
-namespace yield // for starters just for bills
+namespace quote
 {
 
-	template<typename T = double>
-	using yield = std::variant<
-		ANBIMA<T>
-	>;
-
-
-	template<typename T = double>
-	inline auto yield_to_price(
-		const T& y,
-		const bill::bill<T>& bill,
-		price::price<T> p, // to bring in market conventions
-		const yield<T>& yield
-	) -> price::price<T>
+	TEST(quote, constructor1)
 	{
-		return std::visit(
-			[&](const auto& yield)
-			{
-				return yield.price(y, bill, price);
-			},
-			yield
-		);
+		const auto settlement_date = std::chrono::year_month_day{ 2025y / January / 3d };
+		const auto p = quote{ settlement_date };
+
+		EXPECT_EQ(p.get_settlement_date(), settlement_date);
+		EXPECT_EQ(p.get_face(), 100.0);
 	}
 
 }

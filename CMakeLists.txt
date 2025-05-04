@@ -33,8 +33,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(bill)
-add_subdirectory(price)
-add_subdirectory(yield)
+add_subdirectory(quote)
+add_subdirectory(yield_methodology)
 
 #set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
 #export(PACKAGE DebtSecurity)

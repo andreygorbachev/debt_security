@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <yield.h>
+#include <yield_methodology.h>
 
 #include <gtest/gtest.h>
 
@@ -28,10 +28,10 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace yield
+namespace yield_methodology
 {
 
-	TEST(yield, price1)
+	TEST(yield_methodology , price1)
 	{
 	}
 

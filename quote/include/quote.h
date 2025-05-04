@@ -20,27 +20,60 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <price.h>
+#pragma once
 
-#include <gtest/gtest.h>
-
-using namespace std;
-using namespace std::chrono;
+#include <chrono>
+#include <utility>
 
 
-namespace price
+namespace quote // should we call it quotation_methodology?
 {
 
-	TEST(price, constructor1)
+	template<typename T = double>
+	class quote final
 	{
-		const auto settlement_date = std::chrono::year_month_day{ 2025y / January / 3d };
-		const auto settlement_price = 99.0;
-		const auto face = 100.0;
-		const auto p = price{ settlement_date, settlement_price, face };
 
-		EXPECT_EQ(p.get_settlement_date(), settlement_date);
-		EXPECT_EQ(p.get_settlement_price(), settlement_price);
-		EXPECT_EQ(p.get_face(), face);
+	public:
+
+		explicit quote(
+			std::chrono::year_month_day settlement_date,
+			T face = 100
+		) noexcept;
+
+	public:
+
+		auto get_settlement_date() const noexcept -> const std::chrono::year_month_day&;
+		auto get_face() const noexcept -> const T&;
+
+	private:
+
+		std::chrono::year_month_day settlement_date_{};
+		T face_{};
+
+	};
+
+
+	template<typename T>
+	quote<T>::quote(
+		std::chrono::year_month_day settlement_date,
+		T face
+	) noexcept :
+		settlement_date_{ std::move(settlement_date) },
+		face_{ std::move(face) }
+	{
+	}
+
+
+	template<typename T>
+	auto quote<T>::get_settlement_date() const noexcept -> const std::chrono::year_month_day&
+	{
+		return settlement_date_;
+	}
+
+	template<typename T>
+	auto quote<T>::get_face() const noexcept -> const T&
+	{
+		return face_;
 	}
 
 }

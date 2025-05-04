@@ -1,9 +1,9 @@
-project("price")
+project("quote")
 
 add_library(${PROJECT_NAME} INTERFACE
-  price.h
+  quote.h
 )
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS price NAMESPACE Price:: FILE Price.cmake)
+export(TARGETS quote NAMESPACE Quote:: FILE Quote.cmake)

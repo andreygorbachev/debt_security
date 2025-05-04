@@ -24,41 +24,38 @@
 
 #include <chrono>
 #include <utility>
+#include <variant>
 
 #include <bill.h>
-#include <price.h>
+#include <quote.h>
+
+#include "ANBIMA.h"
 
 
-namespace yield
+namespace yield_methodology // for starters just for bills
 {
 
 	template<typename T = double>
-	class ANBIMA final // better name?
-	{
-
-	public:
-
-		auto price(
-			const T& yield,
-			const bill::bill<T>& bill,
-			price::price<T> price // to bring in market conventions
-		) const -> price::price<T>;
-
-	};
+	using yield_methodology = std::variant<
+		ANBIMA<T>
+	>;
 
 
-	template<typename T>
-	auto ANBIMA<T>::price(
+	template<typename T = double>
+	inline auto yield_to_price(
 		const T& yield,
 		const bill::bill<T>& bill,
-		price::price<T> price
-	) const -> price::price<T>
+		const quote::quote<T>& quote, // this is for the resulting price (when both yield and price are quoted, should we pass in both and check their consistency?)
+		const yield_methodology<T>& yield_methodology
+	) -> T
 	{
-		const auto cf = bill.cash_flow();
-//		const auto dc = day_count::calcation_252{ cal };
-//		const auto year_fraction = dc.fraction(price.get_settlement_date(), cf.get_date());
-
-		return price; // mock up
+		return std::visit(
+			[&](const auto& yield_methodology)
+			{
+				return yield_methodology.price(yield, bill, quote);
+			},
+			yield_methodology
+		);
 	}
 
 }

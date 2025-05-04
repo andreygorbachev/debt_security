@@ -25,66 +25,40 @@
 #include <chrono>
 #include <utility>
 
+#include <bill.h>
+#include <quote.h>
 
-namespace price
+
+namespace yield_methodology
 {
 
 	template<typename T = double>
-	class price final
+	class ANBIMA final // better name?
 	{
 
 	public:
 
-		explicit price(
-			std::chrono::year_month_day settlement_date,
-			T settlement_price,
-			T face = 100
-		) noexcept;
-
-	public:
-
-		auto get_settlement_date() const noexcept -> const std::chrono::year_month_day&;
-		auto get_settlement_price() const noexcept -> const T&;
-		auto get_face() const noexcept -> const T&;
-
-	private:
-
-		std::chrono::year_month_day settlement_date_{};
-		T settlement_price_{};
-		T face_{};
+		auto price(
+			const T& yield,
+			const bill::bill<T>& bill,
+			const quote::quote<T>& quote
+		) const -> T;
 
 	};
 
 
 	template<typename T>
-	price<T>::price(
-		std::chrono::year_month_day settlement_date,
-		T settlement_price,
-		T face
-	) noexcept :
-		settlement_date_{ std::move(settlement_date) },
-		settlement_price_{ std::move(settlement_price) },
-		face_{ std::move(face) }
+	auto ANBIMA<T>::price(
+		const T& yield,
+		const bill::bill<T>& bill,
+		const quote::quote<T>& quote
+	) const -> T
 	{
-	}
+		const auto cf = bill.cash_flow();
+//		const auto dc = day_count::calcation_252{ cal };
+//		const auto year_fraction = dc.fraction(price.get_settlement_date(), cf.get_date());
 
-
-	template<typename T>
-	auto price<T>::get_settlement_date() const noexcept -> const std::chrono::year_month_day&
-	{
-		return settlement_date_;
-	}
-
-	template<typename T>
-	auto price<T>::get_settlement_price() const noexcept -> const T&
-	{
-		return settlement_price_;
-	}
-
-	template<typename T>
-	auto price<T>::get_face() const noexcept -> const T&
-	{
-		return face_;
+		return price; // mock up
 	}
 
 }
