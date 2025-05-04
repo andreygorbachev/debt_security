@@ -26,13 +26,36 @@
 #include <utility>
 #include <variant>
 
+#include <bill.h>
+#include <price.h>
+
+#include "ANBIMA.h"
+
 
 namespace yield // for starters just for bills
 {
 
 	template<typename T = double>
-	class yield
+	using yield = std::variant<
+		ANBIMA<T>
+	>;
+
+
+	template<typename T = double>
+	inline auto yield_to_price(
+		const T& y,
+		const bill::bill<T>& bill,
+		price::price<T> p, // to bring in market conventions
+		const yield<T>& yield
+	) -> price::price<T>
 	{
-	};
+		return std::visit(
+			[&](const auto& yield)
+			{
+				return yield.price(y, bill, price);
+			},
+			yield
+		);
+	}
 
 }

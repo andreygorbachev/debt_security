@@ -31,7 +31,7 @@ using namespace std::chrono;
 namespace yield
 {
 
-	TEST(yield, test1)
+	TEST(yield, price1)
 	{
 	}
 

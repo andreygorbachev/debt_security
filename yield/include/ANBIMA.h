@@ -22,11 +22,11 @@
 
 #pragma once
 
-#include <bill.h>
-#include <price.h>
-
 #include <chrono>
 #include <utility>
+
+#include <bill.h>
+#include <price.h>
 
 
 namespace yield
@@ -54,6 +54,10 @@ namespace yield
 		price::price<T> price
 	) const -> price::price<T>
 	{
+		const auto cf = bill.cash_flow();
+//		const auto dc = day_count::calcation_252{ cal };
+//		const auto year_fraction = dc.fraction(price.get_settlement_date(), cf.get_date());
+
 		return price; // mock up
 	}
 

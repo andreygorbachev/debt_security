@@ -25,6 +25,8 @@
 #include <chrono>
 #include <utility>
 
+#include <calendar.h>
+
 #include <cash_flow.h>
 
 
@@ -40,6 +42,7 @@ namespace bill
 		explicit bill(
 			std::chrono::year_month_day issue_date,
 			std::chrono::year_month_day maturity_date, // or should these 2 be captured as a georgian::period?
+			gregorian::calendar cal, // do we want to copy these everywhere?
 			T face = 100 // do we care for this? (or is it just part of price?) if we do not have it we'll have to have cashflow to be based on a unit notional
 		) noexcept;
 
@@ -47,6 +50,7 @@ namespace bill
 
 		auto get_issue_date() const noexcept -> const std::chrono::year_month_day&;
 		auto get_maturity_date() const noexcept -> const std::chrono::year_month_day&;
+		auto get_calendar() const noexcept -> const gregorian::calendar&;
 		auto get_face() const noexcept -> const T&;
 
 	public:
@@ -58,6 +62,7 @@ namespace bill
 
 		std::chrono::year_month_day issue_date_{};
 		std::chrono::year_month_day maturity_date_{};
+		gregorian::calendar cal_{};
 		T face_{};
 
 	};
@@ -67,10 +72,12 @@ namespace bill
 	bill<T>::bill(
 		std::chrono::year_month_day issue_date,
 		std::chrono::year_month_day maturity_date,
+		gregorian::calendar cal,
 		T face
 	) noexcept :
 		issue_date_{ std::move(issue_date) },
 		maturity_date_{ std::move(maturity_date) },
+		cal_{ std::move(cal) },
 		face_{ std::move(face) }
 	{
 	}
@@ -86,6 +93,12 @@ namespace bill
 	auto bill<T>::get_maturity_date() const noexcept -> const std::chrono::year_month_day&
 	{
 		return maturity_date_;
+	}
+
+	template<typename T>
+	auto bill<T>::get_calendar() const noexcept -> const gregorian::calendar&
+	{
+		return cal_;
 	}
 
 	template<typename T>
