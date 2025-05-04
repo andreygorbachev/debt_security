@@ -61,8 +61,7 @@ namespace debt_security
 		const auto dc = day_count::calculation_252{ bill.get_calendar() };
 		const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
 
-		const auto price = quote.get_face() / std::pow(1.0 + yield, yf); // should be truncated to 6 decimal places
-		// at the moment - only for doubles
+		const auto price = quote.get_face() / pow(1 + yield, yf); // should be truncated to 6 decimal places
 		return price;
 	}
 
