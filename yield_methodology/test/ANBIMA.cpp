@@ -20,19 +20,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include "setup.h"
+
 #include <ANBIMA.h>
+#include <bill.h>
+#include <quote.h>
+
+#include <calendar.h>
+#include <period.h>
 
 #include <gtest/gtest.h>
 
 using namespace std;
 using namespace std::chrono;
+using namespace gregorian;
+//using namespace bill;
+//using namespace quote;
 
 
-namespace yield
+namespace yield_methodology
 {
 
 	TEST(ANBIMA, price1)
 	{
+		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
+
+		const auto issue_date = year_month_day{ 2007y / July / 1d }; // made up (does not matter)
+		const auto maturity_date = year_month_day{ 2010y / July / 1d };
+		const auto& cal = make_calendar_ANBIMA();
+		const auto face = 1000.0;
+		const auto LTN = bill::bill{ issue_date, maturity_date, cal, face };
+
+		const auto settlement_date = year_month_day{ 2008y / May / 21d };
+		const auto quote = quote::quote{ settlement_date };
+
+		const auto ANBIMA = yield_methodology::ANBIMA{};
+
+		// check the setup of the test first
+		const auto bd = cal.count_business_days(days_period{
+			settlement_date,
+			sys_days{ maturity_date } - days{ 1 } // "end date" should be expcuded
+		});
+		EXPECT_EQ(bd, 532);
+
+		const auto yield = 0.1436;
+		const auto price = ANBIMA.price(yield, LTN, quote);
+		EXPECT_EQ(price, 753.315323);
 	}
 
 }

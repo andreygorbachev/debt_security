@@ -33,11 +33,11 @@ namespace quote
 
 	TEST(quote, constructor1)
 	{
-		const auto settlement_date = std::chrono::year_month_day{ 2025y / January / 3d };
-		const auto p = quote{ settlement_date };
+		const auto settlement_date = year_month_day{ 2025y / January / 3d };
+		const auto q = quote{ settlement_date };
 
-		EXPECT_EQ(p.get_settlement_date(), settlement_date);
-		EXPECT_EQ(p.get_face(), 100.0);
+		EXPECT_EQ(q.get_settlement_date(), settlement_date);
+		EXPECT_EQ(q.get_face(), 100.0);
 	}
 
 }

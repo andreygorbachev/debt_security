@@ -3,6 +3,7 @@ project(yield-methodology-test)
 add_executable(${PROJECT_NAME}
   ANBIMA.cpp
   yield_methodology.cpp
+  setup.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
