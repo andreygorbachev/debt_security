@@ -24,6 +24,9 @@
 
 #include <chrono>
 #include <utility>
+#include <cmath>
+
+#include <calculation_252.h>
 
 #include <bill.h>
 #include <quote.h>
@@ -55,10 +58,12 @@ namespace debt_security
 	) const -> T
 	{
 		const auto cf = bill.cashflow();
-//		const auto dc = day_count::calcation_252{ cal };
-//		const auto year_fraction = dc.fraction(price.get_settlement_date(), cf.get_date());
+		const auto dc = day_count::calculation_252{ bill.get_calendar() };
+		const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
 
-		return 1000.0; // mock up
+		const auto price = quote.get_face() / std::pow(1.0 + yield, yf); // should be truncated to 6 decimal places
+		// at the moment - only for doubles
+		return price;
 	}
 
 }

@@ -57,8 +57,8 @@ namespace debt_security
 
 		const auto cf = b.cashflow();
 
-		EXPECT_EQ(cf.get_date(), maturity_date);
-		EXPECT_EQ(cf.get_flow(), face);
+		EXPECT_EQ(cf.get_payment_date(), maturity_date);
+		EXPECT_EQ(cf.get_amount(), face);
 	}
 
 }

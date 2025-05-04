@@ -45,9 +45,9 @@ namespace debt_security
 
 		const auto issue_date = year_month_day{ 2007y / July / 1d }; // made up (does not matter)
 		const auto maturity_date = year_month_day{ 2010y / July / 1d };
-		const auto& cal = make_calendar_ANBIMA();
+		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto LTN = bill{ issue_date, maturity_date, cal, face };
+		const auto LTN = bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = year_month_day{ 2008y / May / 21d };
 		const auto quote = debt_security::quote{ settlement_date, face };
@@ -55,7 +55,7 @@ namespace debt_security
 		const auto ANBIMA = debt_security::ANBIMA{};
 
 		// check the setup of the test first
-		const auto bd = cal.count_business_days(days_period{
+		const auto bd = calendar.count_business_days(days_period{
 			settlement_date,
 			sys_days{ maturity_date } - days{ 1 } // "end date" should be expcuded
 		});
