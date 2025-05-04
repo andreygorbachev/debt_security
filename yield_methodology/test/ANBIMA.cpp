@@ -34,11 +34,9 @@
 using namespace std;
 using namespace std::chrono;
 using namespace gregorian;
-//using namespace bill;
-//using namespace quote;
 
 
-namespace yield_methodology
+namespace debt_security
 {
 
 	TEST(ANBIMA, price1)
@@ -49,12 +47,12 @@ namespace yield_methodology
 		const auto maturity_date = year_month_day{ 2010y / July / 1d };
 		const auto& cal = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto LTN = bill::bill{ issue_date, maturity_date, cal, face };
+		const auto LTN = bill{ issue_date, maturity_date, cal, face };
 
 		const auto settlement_date = year_month_day{ 2008y / May / 21d };
-		const auto quote = quote::quote{ settlement_date };
+		const auto quote = debt_security::quote{ settlement_date, face };
 
-		const auto ANBIMA = yield_methodology::ANBIMA{};
+		const auto ANBIMA = debt_security::ANBIMA{};
 
 		// check the setup of the test first
 		const auto bd = cal.count_business_days(days_period{

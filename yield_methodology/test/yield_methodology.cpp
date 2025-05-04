@@ -28,7 +28,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace yield_methodology
+namespace debt_security
 {
 
 	TEST(yield_methodology , price1)

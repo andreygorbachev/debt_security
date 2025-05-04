@@ -26,11 +26,11 @@
 #include <utility>
 
 
-namespace quote // should we call it quotation_methodology?
+namespace debt_security
 {
 
 	template<typename T = double>
-	class quote final
+	class quote final // should we call it quotation_methodology?
 	{
 
 	public:

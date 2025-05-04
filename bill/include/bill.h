@@ -31,7 +31,7 @@
 #include <cash_flow.h>
 
 
-namespace bill
+namespace debt_security
 {
 
 	template<typename T = double>

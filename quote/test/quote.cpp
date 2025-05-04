@@ -28,7 +28,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace quote
+namespace debt_security
 {
 
 	TEST(quote, constructor1)

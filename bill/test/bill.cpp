@@ -30,7 +30,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace bill
+namespace debt_security
 {
 
 	TEST(bill, constructor1)

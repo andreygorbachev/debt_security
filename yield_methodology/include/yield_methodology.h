@@ -32,20 +32,20 @@
 #include "ANBIMA.h"
 
 
-namespace yield_methodology // for starters just for bills
+namespace debt_security
 {
 
 	template<typename T = double>
 	using yield_methodology = std::variant<
 		ANBIMA<T>
-	>;
+	>; // for starters just for bills
 
 
 	template<typename T = double>
 	inline auto yield_to_price(
 		const T& yield,
-		const bill::bill<T>& bill,
-		const quote::quote<T>& quote, // this is for the resulting price (when both yield and price are quoted, should we pass in both and check their consistency?)
+		const bill<T>& bill,
+		const quote<T>& quote, // this is for the resulting price (when both yield and price are quoted, should we pass in both and check their consistency?)
 		const yield_methodology<T>& yield_methodology
 	) -> T
 	{

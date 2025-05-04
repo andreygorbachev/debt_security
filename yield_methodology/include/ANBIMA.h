@@ -29,7 +29,7 @@
 #include <quote.h>
 
 
-namespace yield_methodology
+namespace debt_security
 {
 
 	template<typename T = double>
@@ -40,8 +40,8 @@ namespace yield_methodology
 
 		auto price(
 			const T& yield,
-			const bill::bill<T>& bill,
-			const quote::quote<T>& quote
+			const bill<T>& bill,
+			const quote<T>& quote
 		) const -> T;
 
 	};
@@ -50,11 +50,11 @@ namespace yield_methodology
 	template<typename T>
 	auto ANBIMA<T>::price(
 		const T& yield,
-		const bill::bill<T>& bill,
-		const quote::quote<T>& quote
+		const bill<T>& bill,
+		const quote<T>& quote
 	) const -> T
 	{
-//		const auto cf = bill.cash_flow();
+		const auto cf = bill.cashflow();
 //		const auto dc = day_count::calcation_252{ cal };
 //		const auto year_fraction = dc.fraction(price.get_settlement_date(), cf.get_date());
 
