@@ -31,8 +31,11 @@ using namespace std::chrono;
 namespace debt_security
 {
 
-	TEST(yield_methodology , price1)
+	TEST(yield_methodology, price1)
 	{
+		auto yield_method = yield_methodology{};
+
+		yield_method = ANBIMA{};
 	}
 
 }
