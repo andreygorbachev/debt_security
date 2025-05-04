@@ -57,7 +57,7 @@ namespace debt_security
 		const quote<T>& quote
 	) const -> T
 	{
-		const auto cf = bill.cashflow();
+		const auto cf = bill.cash_flow();
 		const auto dc = day_count::calculation_252{ bill.get_calendar() };
 		const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
 
