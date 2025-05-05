@@ -33,7 +33,7 @@ namespace debt_security
 
 	TEST(quote, constructor1)
 	{
-		const auto settlement_date = year_month_day{ 2025y / January / 3d };
+		const auto settlement_date = 2025y / January / 3d;
 		const auto q = quote{ settlement_date };
 
 		EXPECT_EQ(q.get_settlement_date(), settlement_date);

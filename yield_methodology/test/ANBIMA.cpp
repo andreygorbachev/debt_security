@@ -43,13 +43,13 @@ namespace debt_security
 	{
 		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
 
-		const auto issue_date = year_month_day{ 2007y / July / 1d }; // made up (does not matter)
-		const auto maturity_date = year_month_day{ 2010y / July / 1d };
+		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
+		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
-		const auto settlement_date = year_month_day{ 2008y / May / 21d };
+		const auto settlement_date = 2008y / May / 21d;
 		const auto quote = debt_security::quote{ settlement_date, face };
 
 		const auto ANBIMA = debt_security::ANBIMA{};

@@ -35,8 +35,8 @@ namespace debt_security
 
 	TEST(bill, constructor1)
 	{
-		const auto issue_date = year_month_day{ 2025y / January / 1d };
-		const auto maturity_date = year_month_day{ 2025y / February / 1d };
+		const auto issue_date = 2025y / January / 1d;
+		const auto maturity_date = 2025y / February / 1d;
 		const auto& cal = make_calendar_ANBIMA();
 		const auto face = 1000.0;
 		const auto b = bill{ issue_date, maturity_date, cal, face };
@@ -49,15 +49,15 @@ namespace debt_security
 
 	TEST(bill, cash_flow1)
 	{
-		const auto issue_date = year_month_day{ 2025y / January / 1d };
-		const auto maturity_date = year_month_day{ 2025y / February / 1d };
+		const auto issue_date = 2025y / January / 1d;
+		const auto maturity_date = 2025y / February / 1d;
 		const auto& cal = make_calendar_ANBIMA();
 		const auto face = 1000.0;
 		const auto b = bill{ issue_date, maturity_date, cal, face };
 
 		const auto cf = b.cash_flow();
 
-		EXPECT_EQ(cf.get_payment_date(), maturity_date);
+		EXPECT_EQ(cf.get_payment_date(), 2025y / February / 3d);
 		EXPECT_EQ(cf.get_amount(), face);
 	}
 
