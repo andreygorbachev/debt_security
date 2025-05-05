@@ -37,13 +37,13 @@ namespace debt_security
 	{
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
-		const auto& cal = make_calendar_ANBIMA();
+		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto b = bill{ issue_date, maturity_date, cal, face };
+		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
 		EXPECT_EQ(b.get_issue_date(), issue_date);
 		EXPECT_EQ(b.get_maturity_date(), maturity_date);
-		EXPECT_EQ(b.get_calendar(), cal);
+		EXPECT_EQ(b.get_calendar(), calendar);
 		EXPECT_EQ(b.get_face(), face);
 	}
 
@@ -51,9 +51,9 @@ namespace debt_security
 	{
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
-		const auto& cal = make_calendar_ANBIMA();
+		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto b = bill{ issue_date, maturity_date, cal, face };
+		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
 		const auto cf = b.cash_flow();
 
