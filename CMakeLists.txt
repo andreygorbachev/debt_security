@@ -34,7 +34,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 set(BOOST_INCLUDE_LIBRARIES multiprecision)
-set(BOOST_MP_STANDALONE TRUE)
+set(BOOST_MP_STANDALONE TRUE) # this is still not working
 
 FetchContent_Declare(
   Boost
