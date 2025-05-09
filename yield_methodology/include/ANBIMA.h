@@ -63,9 +63,10 @@ namespace debt_security
 
 		const auto price = quote.get_face() / pow(1 + yield, yf);
 
-		const auto& truncate = quote.get_truncate();
+		const auto& truncate = quote.get_truncate(); // assuming that 14 decimal places from above will be hard coded, should this also be hard coded?
 		if (truncate)
 		{
+			// factor out as a function?
 			const auto x = pow(10, *truncate);
 			return trunc(price * x) / x;
 		}
