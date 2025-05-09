@@ -38,6 +38,7 @@ namespace debt_security
 
 		EXPECT_EQ(q.get_settlement_date(), settlement_date);
 		EXPECT_EQ(q.get_face(), 100.0);
+		EXPECT_EQ(q.get_truncate(), nullopt);
 	}
 
 }

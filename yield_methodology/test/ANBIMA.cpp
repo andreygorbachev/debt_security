@@ -53,7 +53,8 @@ namespace debt_security
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
-		const auto quote = debt_security::quote{ settlement_date, face };
+		const auto truncate = 6u;
+		const auto quote = debt_security::quote{ settlement_date, face, truncate };
 
 		const auto ANBIMA = debt_security::ANBIMA{};
 
@@ -81,7 +82,8 @@ namespace debt_security
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
-		const auto quote = debt_security::quote{ settlement_date, face };
+		const auto truncate = 6u;
+		const auto quote = debt_security::quote{ settlement_date, face, truncate };
 
 		const auto ANBIMA = debt_security::ANBIMA<cpp_dec_float_50>{};
 

@@ -24,6 +24,7 @@
 
 #include <chrono>
 #include <utility>
+#include <optional>
 
 
 namespace debt_security
@@ -37,18 +38,21 @@ namespace debt_security
 
 		explicit quote(
 			std::chrono::year_month_day settlement_date,
-			T face = 100
+			T face = 100,
+			std::optional<unsigned int> truncate = std::nullopt
 		) noexcept;
 
 	public:
 
 		auto get_settlement_date() const noexcept -> const std::chrono::year_month_day&;
 		auto get_face() const noexcept -> const T&;
+		auto get_truncate() const noexcept -> const std::optional<unsigned int>&;
 
 	private:
 
 		std::chrono::year_month_day settlement_date_{};
 		T face_{};
+		std::optional<unsigned int> truncate_{};
 
 	};
 
@@ -56,10 +60,12 @@ namespace debt_security
 	template<typename T>
 	quote<T>::quote(
 		std::chrono::year_month_day settlement_date,
-		T face
+		T face,
+		std::optional<unsigned int> truncate
 	) noexcept :
 		settlement_date_{ std::move(settlement_date) },
-		face_{ std::move(face) }
+		face_{ std::move(face) },
+		truncate_{ std::move(truncate) }
 	{
 	}
 
@@ -74,6 +80,12 @@ namespace debt_security
 	auto quote<T>::get_face() const noexcept -> const T&
 	{
 		return face_;
+	}
+
+	template<typename T>
+	auto quote<T>::get_truncate() const noexcept -> const std::optional<unsigned int>&
+	{
+		return truncate_;
 	}
 
 }
