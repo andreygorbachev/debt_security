@@ -89,7 +89,7 @@ namespace debt_security
 		const auto bd = calendar.count_business_days(days_period{
 			settlement_date,
 			sys_days{ maturity_date } - days{ 1 } // "end date" should be excluded
-			});
+		});
 		EXPECT_EQ(bd, 532/*zu*/);
 
 		const auto yield = cpp_dec_float_50{ "0.1436" };
