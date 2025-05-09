@@ -29,10 +29,13 @@
 #include <calendar.h>
 #include <period.h>
 
+#include <boost/multiprecision/cpp_dec_float.hpp>
+
 #include <gtest/gtest.h>
 
 using namespace std;
 using namespace std::chrono;
+using namespace boost::multiprecision;
 using namespace gregorian;
 
 
@@ -59,11 +62,39 @@ namespace debt_security
 			settlement_date,
 			sys_days{ maturity_date } - days{ 1 } // "end date" should be excluded
 		});
-		EXPECT_EQ(bd, 532);
+		EXPECT_EQ(bd, 532/*zu*/);
 
 		const auto yield = 0.1436;
 		const auto price = ANBIMA.price(yield, LTN, quote);
 		EXPECT_EQ(price, 753.315323);
+	}
+
+
+	TEST(ANBIMA, price2)
+	{
+		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
+
+		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
+		const auto maturity_date = 2010y / July / 1d;
+		const auto& calendar = make_calendar_ANBIMA();
+		const auto face = cpp_dec_float_50{ 1000 };
+		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
+
+		const auto settlement_date = 2008y / May / 21d;
+		const auto quote = debt_security::quote{ settlement_date, face };
+
+		const auto ANBIMA = debt_security::ANBIMA<cpp_dec_float_50>{};
+
+		// check the setup of the test first
+		const auto bd = calendar.count_business_days(days_period{
+			settlement_date,
+			sys_days{ maturity_date } - days{ 1 } // "end date" should be excluded
+			});
+		EXPECT_EQ(bd, 532/*zu*/);
+
+		const auto yield = cpp_dec_float_50{ "0.1436" };
+		const auto price = ANBIMA.price(yield, LTN, quote);
+		EXPECT_EQ(price, cpp_dec_float_50{ "753.315323" });
 	}
 
 }

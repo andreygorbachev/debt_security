@@ -14,6 +14,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   calendar
   business-day-convention
   day-count
+  Boost::multiprecision
   GTest::gtest_main
 )
 

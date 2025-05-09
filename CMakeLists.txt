@@ -6,10 +6,9 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED On)
 set(CMAKE_CXX_EXTENSIONS Off)
 
-set(GREGORIAN_CALENDAR_MINIMAL TRUE)
-set(FIN_CALENDAR_MINIMAL TRUE)
-
 include(FetchContent)
+
+set(GREGORIAN_CALENDAR_MINIMAL TRUE)
 
 FetchContent_Declare(
   calendar
@@ -17,6 +16,8 @@ FetchContent_Declare(
   GIT_TAG        main
 )
 FetchContent_MakeAvailable(calendar)
+
+set(FIN_CALENDAR_MINIMAL TRUE)
 
 FetchContent_Declare(
   fin-calendar
@@ -31,6 +32,16 @@ FetchContent_Declare(
   GIT_TAG        v1.16.0
 )
 FetchContent_MakeAvailable(googletest)
+
+set(BOOST_INCLUDE_LIBRARIES multiprecision)
+set(BOOST_MP_STANDALONE TRUE)
+
+FetchContent_Declare(
+  Boost
+  GIT_REPOSITORY https://github.com/boostorg/boost.git
+  GIT_TAG        boost-1.88.0
+)
+FetchContent_MakeAvailable(Boost)
 
 add_subdirectory(bill)
 add_subdirectory(quote)
