@@ -78,7 +78,7 @@ namespace debt_security
 		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = make_calendar_ANBIMA();
-		const auto face = cpp_dec_float_50{ 1000 };
+		const auto face = cpp_dec_float_50{ "1000" };
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;

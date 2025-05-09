@@ -26,13 +26,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fin-calendar)
 
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        v1.16.0
-)
-FetchContent_MakeAvailable(googletest)
-
 set(BOOST_INCLUDE_LIBRARIES multiprecision)
 set(BOOST_MP_STANDALONE TRUE) # this is still not working
 
@@ -42,6 +35,13 @@ FetchContent_Declare(
   GIT_TAG        boost-1.88.0
 )
 FetchContent_MakeAvailable(Boost)
+
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        v1.16.0
+)
+FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(bill)
 add_subdirectory(quote)
