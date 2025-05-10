@@ -56,7 +56,7 @@ namespace debt_security
 
 	public:
 
-		auto cash_flow() const -> cash_flow::cash_flow<T>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
+		auto cash_flow() const -> fin_calendar::cash_flow<T>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
 
 	private:
 
@@ -109,12 +109,12 @@ namespace debt_security
 
 
 	template<typename T>
-	auto bill<T>::cash_flow() const -> cash_flow::cash_flow<T> // do we want to cache this? (and return a const reference?)
+	auto bill<T>::cash_flow() const -> fin_calendar::cash_flow<T> // do we want to cache this? (and return a const reference?)
 	{
-		const auto f = business_day_convention::following{};
+		const auto f = fin_calendar::following{};
 		const auto payment_date = f.adjust(maturity_date_, cal_);
 
-		return cash_flow::cash_flow<T>{ payment_date, face_ };
+		return fin_calendar::cash_flow<T>{ payment_date, face_ };
 	}
 
 }
