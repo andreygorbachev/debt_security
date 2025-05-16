@@ -26,6 +26,8 @@
 #include <bill.h>
 #include <quote.h>
 
+#include <resets_math.h>
+
 #include <calendar.h>
 #include <period.h>
 
@@ -66,7 +68,7 @@ namespace debt_security
 		});
 		EXPECT_EQ(bd, 532/*zu*/);
 
-		const auto yield = 0.1436;
+		const auto yield = from_percent(14.36);
 		const auto price = ANBIMA.price(yield, LTN, quote);
 		EXPECT_EQ(price, 753.315323);
 	}
@@ -94,7 +96,7 @@ namespace debt_security
 		});
 		EXPECT_EQ(bd, 532/*zu*/);
 
-		const auto yield = cpp_dec_float_50{ "0.1436" };
+		const auto yield = from_percent(cpp_dec_float_50{ "14.36" });
 		const auto price = ANBIMA.price(yield, LTN, quote);
 		EXPECT_EQ(price, cpp_dec_float_50{ "753.315323" });
 	}
@@ -123,7 +125,7 @@ namespace debt_security
 		});
 		EXPECT_EQ(bd, 1459/*zu*/);
 
-		const auto yield = -0.0002;
+		const auto yield = from_percent(-0.02);
 		const auto price = ANBIMA.price(yield, LFT, quote);
 		EXPECT_EQ(price, 100.1158);
 	}
@@ -151,7 +153,7 @@ namespace debt_security
 		});
 		EXPECT_EQ(bd, 1459/*zu*/);
 
-		const auto yield = cpp_dec_float_50{ "-0.0002" };
+		const auto yield = from_percent(cpp_dec_float_50{ "-0.02" });
 		const auto price = ANBIMA.price(yield, LFT, quote);
 		EXPECT_EQ(price, cpp_dec_float_50{ "100.1158" });
 	}
