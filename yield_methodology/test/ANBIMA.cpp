@@ -102,7 +102,7 @@ namespace debt_security
 
 	TEST(ANBIMA, LFT1)
 	{
-		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
+		// from "Metodologia de Cálculo dos Títulos Públicos Federais Ofertados nos Leilões Primários"
 
 		const auto issue_date = 2000y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2014y / March / 7d;
@@ -130,7 +130,7 @@ namespace debt_security
 
 	TEST(ANBIMA, LFT2)
 	{
-		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
+		// from "Metodologia de Cálculo dos Títulos Públicos Federais Ofertados nos Leilões Primários"
 
 		const auto issue_date = 2000y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2014y / March / 7d;
