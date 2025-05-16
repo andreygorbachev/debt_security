@@ -53,6 +53,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(bill)
+add_subdirectory(bond)
 add_subdirectory(quote)
 add_subdirectory(yield_methodology)
 
