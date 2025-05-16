@@ -67,7 +67,7 @@ namespace debt_security
 		if (truncate)
 		{
 			// factor out as a function?
-			const auto x = pow(10, *truncate);
+			const auto x = pow(T{ 10 }, *truncate);
 			return trunc(price * x) / x;
 		}
 		else
