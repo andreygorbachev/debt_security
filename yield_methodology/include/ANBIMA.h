@@ -22,9 +22,7 @@
 
 #pragma once
 
-#include <chrono>
-#include <utility>
-#include <cmath>
+#include <resets_math.h>
 
 #include <calculation_252.h>
 
@@ -61,15 +59,11 @@ namespace debt_security
 		const auto dc = fin_calendar::calculation_252{ bill.get_calendar() };
 		const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
 
-		const auto price = quote.get_face() / pow(1 + yield, yf);
+		const auto price = quote.get_face() / pow(T{ 1 } + yield, yf);
 
 		const auto& truncate = quote.get_truncate(); // assuming that 14 decimal places from above will be hard coded, should this also be hard coded?
 		if (truncate)
-		{
-			// factor out as a function?
-			const auto x = pow(T{ 10 }, *truncate);
-			return trunc(price * x) / x;
-		}
+			return reset::trunc_dp(price, *truncate);
 		else
 			return price;
 	}

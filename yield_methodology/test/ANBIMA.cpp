@@ -37,6 +37,7 @@ using namespace std;
 using namespace std::chrono;
 using namespace boost::multiprecision;
 using namespace gregorian;
+using namespace reset;
 
 
 namespace debt_security

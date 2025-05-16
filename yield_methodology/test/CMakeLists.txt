@@ -14,6 +14,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
   cash-flow # should probably be FinCalendar::cash-flow
   business-day-convention # should probably be FinCalendar::business-day-convention
   day-count # should probably be FinCalendar::day-count
+  reset
   Boost::multiprecision
   GTest::gtest_main
 )
