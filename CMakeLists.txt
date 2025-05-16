@@ -26,6 +26,15 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fin-calendar)
 
+set(RESET_MINIMAL TRUE)
+
+FetchContent_Declare(
+  reset
+  GIT_REPOSITORY https://github.com/andreygorbachev/reset.git
+  GIT_TAG        main
+)
+FetchContent_MakeAvailable(reset)
+
 set(BOOST_INCLUDE_LIBRARIES multiprecision)
 set(BOOST_MP_STANDALONE TRUE) # this is still not working
 
