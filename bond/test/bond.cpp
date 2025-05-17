@@ -39,12 +39,14 @@ namespace debt_security
 		const auto issue_date = 2008y / January / 1d;
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
+		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
 		const auto b = bond{
 			issue_date,
 			maturity_date,
 			frequency,
+			coupon,
 			calendar,
 			face
 		};
@@ -52,6 +54,7 @@ namespace debt_security
 		EXPECT_EQ(b.get_issue_date(), issue_date);
 		EXPECT_EQ(b.get_maturity_date(), maturity_date);
 		EXPECT_EQ(b.get_frequency(), frequency);
+		EXPECT_EQ(b.get_coupon(), coupon);
 		EXPECT_EQ(b.get_calendar(), calendar);
 		EXPECT_EQ(b.get_face(), face);
 	}
@@ -61,12 +64,14 @@ namespace debt_security
 		const auto issue_date = 2008y / January / 1d;
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
+		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
 		const auto b = bond{
 			issue_date,
 			maturity_date,
 			frequency,
+			coupon,
 			calendar,
 			face
 		};

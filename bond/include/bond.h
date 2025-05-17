@@ -45,6 +45,7 @@ namespace debt_security
 			std::chrono::year_month_day issue_date,
 			std::chrono::year_month_day maturity_date, // or should these 2 be captured as a georgian::period?
 			fin_calendar::frequency frequency,
+			T coupon,
 			gregorian::calendar cal, // do we want to copy these everywhere?
 			T face = 100 // do we care for this? (or is it just part of price?) if we do not have it we'll have to have cashflow to be based on a unit notional
 		) noexcept;
@@ -54,6 +55,7 @@ namespace debt_security
 		auto get_issue_date() const noexcept -> const std::chrono::year_month_day&;
 		auto get_maturity_date() const noexcept -> const std::chrono::year_month_day&;
 		auto get_frequency() const noexcept -> const fin_calendar::frequency&;
+		auto get_coupon() const noexcept -> const T&;
 		auto get_calendar() const noexcept -> const gregorian::calendar&;
 		auto get_face() const noexcept -> const T&;
 
@@ -66,6 +68,7 @@ namespace debt_security
 		std::chrono::year_month_day issue_date_{};
 		std::chrono::year_month_day maturity_date_{};
 		fin_calendar::frequency frequency_{};
+		T coupon_{};
 		gregorian::calendar cal_{};
 		T face_{};
 
@@ -77,12 +80,14 @@ namespace debt_security
 		std::chrono::year_month_day issue_date,
 		std::chrono::year_month_day maturity_date,
 		fin_calendar::frequency frequency,
+		T coupon, // as quoted on the market so 10% is passed in as 10.0 - have not decided yet if is a good idea, or not
 		gregorian::calendar cal,
 		T face
 	) noexcept :
 		issue_date_{ std::move(issue_date) },
 		maturity_date_{ std::move(maturity_date) },
 		frequency_{ std::move(frequency) },
+		coupon_{ std::move(coupon) },
 		cal_{ std::move(cal) },
 		face_{ std::move(face) }
 	{
@@ -105,6 +110,12 @@ namespace debt_security
 	auto bond<T>::get_frequency() const noexcept -> const fin_calendar::frequency&
 	{
 		return frequency_;
+	}
+
+	template<typename T>
+	auto bond<T>::get_coupon() const noexcept -> const T&
+	{
+		return coupon_;
 	}
 
 	template<typename T>
