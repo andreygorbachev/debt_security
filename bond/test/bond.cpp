@@ -28,6 +28,7 @@
 
 using namespace std;
 using namespace std::chrono;
+using namespace fin_calendar;
 
 
 namespace debt_security
@@ -35,29 +36,44 @@ namespace debt_security
 
 	TEST(bond, constructor1)
 	{
-		const auto issue_date = 2025y / January / 1d;
-		const auto maturity_date = 2025y / February / 1d;
+		const auto issue_date = 2008y / January / 1d;
+		const auto maturity_date = 2014y / January / 1d;
+		const auto frequency = SemiAnnual;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto b = bond{ issue_date, maturity_date, calendar, face };
+		const auto b = bond{
+			issue_date,
+			maturity_date,
+			frequency,
+			calendar,
+			face
+		};
 
 		EXPECT_EQ(b.get_issue_date(), issue_date);
 		EXPECT_EQ(b.get_maturity_date(), maturity_date);
+		EXPECT_EQ(b.get_frequency(), frequency);
 		EXPECT_EQ(b.get_calendar(), calendar);
 		EXPECT_EQ(b.get_face(), face);
 	}
 
 	TEST(bond, cash_flow1)
 	{
-		const auto issue_date = 2025y / January / 1d;
-		const auto maturity_date = 2025y / February / 1d;
+		const auto issue_date = 2008y / January / 1d;
+		const auto maturity_date = 2014y / January / 1d;
+		const auto frequency = SemiAnnual;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto b = bond{ issue_date, maturity_date, calendar, face };
+		const auto b = bond{
+			issue_date,
+			maturity_date,
+			frequency,
+			calendar,
+			face
+		};
 
 		const auto cf = b.cash_flow();
 
-		EXPECT_EQ(cf.get_payment_date(), 2025y / February / 3d);
+		EXPECT_EQ(cf.get_payment_date(), 2014y / January / 2d);
 		EXPECT_EQ(cf.get_amount(), face);
 	}
 
