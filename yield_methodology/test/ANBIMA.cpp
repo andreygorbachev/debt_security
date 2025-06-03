@@ -28,8 +28,9 @@
 
 #include <resets_math.h>
 
-#include <calendar.h>
 #include <period.h>
+
+#include <calendar.h>
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
@@ -39,6 +40,7 @@ using namespace std;
 using namespace std::chrono;
 using namespace boost::multiprecision;
 using namespace gregorian;
+using namespace gregorian::util;
 using namespace reset;
 
 

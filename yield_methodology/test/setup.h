@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <period.h>
+
 #include <schedule.h>
 #include <annual_holidays.h>
 #include <calendar.h>
@@ -34,6 +36,7 @@ namespace debt_security
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
+		using namespace gregorian::util;
 
 		const auto TiradentesDay = named_holiday{ April / 21d };
 		const auto LabourDay = named_holiday{ May / 1d };
