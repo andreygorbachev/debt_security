@@ -1,11 +1,11 @@
-project(quote-test)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   quote.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  quote
+  debt-security_quote
   GTest::gtest_main
 )
 

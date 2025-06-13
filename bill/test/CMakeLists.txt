@@ -1,4 +1,4 @@
-project(bill-test)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   bill.cpp
@@ -6,10 +6,10 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  bill
-  cash-flow
+  debt-security_bill
   calendar
-  business-day-convention
+  fin-calendar_cash-flow
+  fin-calendar_business-day-convention
   GTest::gtest_main
 )
 

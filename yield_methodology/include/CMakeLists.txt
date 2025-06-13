@@ -1,4 +1,4 @@
-project(yield-methodology)
+# project "debt-security_yield-methodology"
 
 add_library(${PROJECT_NAME} INTERFACE
   ANBIMA.h
@@ -7,4 +7,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS yield-methodology NAMESPACE YieldMethodology:: FILE YieldMethodology.cmake)
+#export(TARGETS yield-methodology NAMESPACE YieldMethodology:: FILE YieldMethodology.cmake)

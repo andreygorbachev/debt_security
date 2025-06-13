@@ -1,4 +1,4 @@
-project(yield-methodology-test)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   ANBIMA.cpp
@@ -7,13 +7,13 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  yield-methodology
-  bill
-  quote
+  debt-security_yield-methodology
+  debt-security_bill
+  debt-security_quote
   calendar
-  cash-flow # should probably be FinCalendar::cash-flow
-  business-day-convention # should probably be FinCalendar::business-day-convention
-  day-count # should probably be FinCalendar::day-count
+  fin-calendar_cash-flow # should probably be FinCalendar::cash-flow
+  fin-calendar_business-day-convention # should probably be FinCalendar::business-day-convention
+  fin-calendar_day-count # should probably be FinCalendar::day-count
   reset
   Boost::config
   Boost::multiprecision

@@ -1,4 +1,4 @@
-project(bond-test)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   bond.cpp
@@ -6,11 +6,11 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  bond
+  debt-security_bond
   calendar
-  cash-flow
-  business-day-convention
-  frequency
+  fin-calendar_cash-flow
+  fin-calendar_business-day-convention
+  fin-calendar_frequency
   GTest::gtest_main
 )
 

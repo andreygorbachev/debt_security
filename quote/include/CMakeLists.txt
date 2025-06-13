@@ -1,4 +1,4 @@
-project("quote")
+# project "debt-security_quote"
 
 add_library(${PROJECT_NAME} INTERFACE
   quote.h
@@ -6,4 +6,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS quote NAMESPACE Quote:: FILE Quote.cmake)
+#export(TARGETS quote NAMESPACE Quote:: FILE Quote.cmake)

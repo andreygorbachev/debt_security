@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project("debt-security" VERSION 0.1.0)
+project("debt-security" VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED On)
@@ -21,7 +21,7 @@ set(FIN_CALENDAR_MINIMAL On)
 
 FetchContent_Declare(
   fin-calendar
-  GIT_REPOSITORY https://github.com/andreygorbachev/fin-calendar.git
+  GIT_REPOSITORY https://github.com/andreygorbachev/fin_calendar.git
   GIT_TAG        main
 )
 FetchContent_MakeAvailable(fin-calendar)
@@ -45,7 +45,7 @@ FetchContent_MakeAvailable(Boost_config)
 FetchContent_Declare(
   Boost_multiprecision
   GIT_REPOSITORY https://github.com/boostorg/multiprecision.git
-  GIT_TAG boost-1.88.0
+  GIT_TAG        boost-1.88.0
 )
 FetchContent_MakeAvailable(Boost_multiprecision)
 

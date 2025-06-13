@@ -1,4 +1,4 @@
-project("bill")
+# project "debt-security_bill"
 
 add_library(${PROJECT_NAME} INTERFACE
   bill.h
@@ -6,4 +6,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS bill NAMESPACE Bill:: FILE Bill.cmake)
+#export(TARGETS bill NAMESPACE Bill:: FILE Bill.cmake)
