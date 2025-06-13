@@ -58,6 +58,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+enable_testing()
+
 add_subdirectory(bill)
 add_subdirectory(bond)
 add_subdirectory(quote)
