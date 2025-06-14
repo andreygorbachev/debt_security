@@ -2,7 +2,7 @@ project("${PROJECT_NAME}_quote" LANGUAGES NONE)
 
 add_subdirectory(include)
 
-if(NOT DEBT_SECURITY_MINIMAL)
+if(${DEBT-SECURITY_BUILD_TESTS_AND_EXAMPLES})
 
 	add_subdirectory(test)
 

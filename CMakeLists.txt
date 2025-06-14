@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS Off)
 
 include(FetchContent)
 
-set(GREGORIAN_CALENDAR_MINIMAL On)
+set(CALENDAR_BUILD_TESTS_AND_EXAMPLES Off)
 
 FetchContent_Declare(
   calendar
@@ -17,7 +17,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(calendar)
 
-set(FIN_CALENDAR_MINIMAL On)
+set(FIN-CALENDAR_BUILD_TESTS_AND_EXAMPLES Off)
 
 FetchContent_Declare(
   fin-calendar
@@ -26,7 +26,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(fin-calendar)
 
-set(RESET_MINIMAL On)
+set(RESET_BUILD_TESTS_AND_EXAMPLES Off)
 
 FetchContent_Declare(
   reset
@@ -58,7 +58,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
+option(DEBT-SECURITY_BUILD_TESTS_AND_EXAMPLES "Build all of debt-security's own tests and examples." On)
+
+if(${DEBT-SECURITY_BUILD_TESTS_AND_EXAMPLES})
+
+  enable_testing()
+
+endif()
 
 add_subdirectory(bill)
 add_subdirectory(bond)
