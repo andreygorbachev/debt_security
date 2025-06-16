@@ -44,7 +44,7 @@ FetchContent_MakeAvailable(Boost_config)
 
 FetchContent_Declare(
   Boost_multiprecision
-  GIT_REPOSITORY https://github.com/boostorg/multiprecision.git
+  GIT_REPOSITORY https://github.com/boostorg/multiprecision.git # should this project and all its dependencies use decimal only? (no templating for double, float, etc.)
   GIT_TAG        boost-1.88.0
 )
 FetchContent_MakeAvailable(Boost_multiprecision)
