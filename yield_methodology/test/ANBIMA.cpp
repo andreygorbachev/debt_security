@@ -44,7 +44,7 @@ using namespace gregorian::util;
 using namespace reset;
 
 
-namespace debt_security
+namespace debt_security // should we mock the ANBIMA calendar?
 {
 
 	TEST(ANBIMA, LTN1)
