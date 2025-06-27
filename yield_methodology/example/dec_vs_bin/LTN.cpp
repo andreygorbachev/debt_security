@@ -35,6 +35,7 @@
 #include <chrono>
 #include <iostream>
 #include <limits>
+#include <cmath>
 
 using namespace std;
 using namespace std::chrono;
@@ -45,37 +46,49 @@ using namespace reset;
 using namespace debt_security;
 
 
-constexpr auto start_date = 2025y / June / 26d;
-constexpr auto number_of_bills = 365 * 50;
-/*constexpr*/ const auto yield = cpp_dec_float_50{ 10 };
+/*constexpr*/ const auto min_yield = cpp_dec_float_50{ "5.0000" };
+/*constexpr*/ const auto max_yield = cpp_dec_float_50{ "15.0000" };
+/*constexpr*/ const auto yield_step = cpp_dec_float_50{ "0.0001" };
 
 
 int main()
 {
 	const auto& calendar = make_calendar_ANBIMA();
 
-	const auto settlement_date = start_date;
+	constexpr auto issue_date = 2008y / May / 21d;
+	constexpr auto maturity_date = 2010y / July / 1d;
 	const auto face = cpp_dec_float_50{ 1000 };
-	const auto truncate = 6u;
-	const auto q = quote<cpp_dec_float_50>{ settlement_date, face, truncate };
+	const auto b_dec = bill<cpp_dec_float_50>{ issue_date, maturity_date, calendar, face };
+	const auto b_bin = bill<double>{ issue_date, maturity_date, calendar, static_cast<double>(face) };
 
-	const auto ym = ANBIMA<cpp_dec_float_50>{};
+	const auto settlement_date = issue_date;
+	const auto price_truncate = 6u;
+	const auto q_dec = quote<cpp_dec_float_50>{ settlement_date, face, price_truncate };
+	const auto q_bin = quote<double>{ settlement_date, static_cast<double>(face), price_truncate };
 
-	const auto issue_date = start_date;
-	for (auto i = 0; i < number_of_bills; ++i)
+	const auto ym_dec = debt_security::ANBIMA<cpp_dec_float_50>{};
+	const auto ym_bin = debt_security::ANBIMA<double>{};
+
+	auto diff = 0.0;
+	for (auto yield = min_yield; yield <= max_yield; yield += yield_step)
 	{
-		const auto maturity_date = year_month_day{ sys_days{ issue_date } + days{ i + 1 } };
-		const auto b = bill<cpp_dec_float_50>{ issue_date, maturity_date, calendar, face };
+		const auto yield_truncate = 4u;
 
-		const auto y = from_percent(yield);
-		const auto price = ym.price(y, b, q);
+		const auto y_dec = from_percent(trunc_dp(yield, yield_truncate));
+		const auto p_dec = ym_dec.price(y_dec, b_dec, q_dec);
 
-		cout
-			<< setprecision(numeric_limits<cpp_dec_float_50>::max_digits10)
-			<< "Issue date: " << issue_date
-			<< ", Maturity date: " << maturity_date
-			<< ", Yield: " << yield
-			<< ", Price: " << price
-			<< endl;
+		const auto y_bin = from_percent(trunc_dp(static_cast<double>(yield), yield_truncate)); // do we need to go via std::string?
+		const auto p_bin = ym_bin.price(y_bin, b_bin, q_bin);
+
+		const auto new_diff = abs(static_cast<double>(p_dec) - p_bin);
+		if(new_diff > diff)
+		{
+			diff = new_diff;
+
+			cout
+				<< setprecision(numeric_limits<cpp_dec_float_50>::max_digits10)
+				<< "New largest diff: " << diff << " for yield: " << yield
+				<< ", Price (decimal): " << p_dec << ", Price (binary): " << p_bin << endl;
+		}
 	}
 }
