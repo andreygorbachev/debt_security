@@ -47,7 +47,7 @@ using namespace debt_security;
 
 constexpr auto start_date = 2025y / June / 26d;
 constexpr auto number_of_bills = 365 * 50;
-/*constexpr*/ const auto yield = cpp_dec_float_50{ "10.0" };
+/*constexpr*/ const auto yield = cpp_dec_float_50{ 10 };
 
 
 int main()
