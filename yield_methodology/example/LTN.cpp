@@ -74,7 +74,7 @@ int main()
 			<< setprecision(numeric_limits<cpp_dec_float_50>::max_digits10)
 			<< "Issue date: " << issue_date
 			<< ", Maturity date: " << maturity_date
-			<< ", Yield: " << y
+			<< ", Yield: " << yield
 			<< ", Price: " << price
 			<< endl;
 	}
