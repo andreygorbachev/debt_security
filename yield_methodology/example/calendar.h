@@ -94,7 +94,7 @@ inline auto _make_calendar_ANBIMA()
 	};
 }
 
-inline auto make_calendar_ANBIMA() -> const gregorian::calendar&
+inline auto make_calendar_ANBIMA() -> const gregorian::calendar& // create static library in gregorian?
 {
 	static const auto s = _make_calendar_ANBIMA();
 	return s;
