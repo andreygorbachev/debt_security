@@ -20,27 +20,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "calendar.h" // maybe not the best name as it clashes with gregorian
+#include <chrono>
+#include <iostream>
+#include <limits>
+
+#include <boost/multiprecision/cpp_dec_float.hpp>
+
+#include <resets_math.h>
+
+#include <static_data.h>
 
 #include <ANBIMA.h>
 #include <bill.h>
 #include <quote.h>
 
-#include <resets_math.h>
-
-#include <calendar.h>
-
-#include <boost/multiprecision/cpp_dec_float.hpp>
-
-#include <chrono>
-#include <iostream>
-#include <limits>
-
 using namespace std;
 using namespace std::chrono;
 using namespace boost::multiprecision;
 using namespace gregorian;
-using namespace gregorian::util;
+using namespace gregorian::static_data;
 using namespace reset;
 using namespace debt_security;
 
@@ -52,7 +50,7 @@ constexpr auto number_of_bills = 365 * 50;
 
 int main()
 {
-	const auto& calendar = make_calendar_ANBIMA();
+	const auto& calendar = make_ANBIMA_calendar();
 
 	const auto settlement_date = start_date;
 	const auto face = cpp_dec_float_50{ 1000 };
