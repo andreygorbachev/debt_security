@@ -50,7 +50,7 @@ constexpr auto number_of_bills = 365 * 50;
 
 int main()
 {
-	const auto& calendar = make_ANBIMA_calendar();
+	const auto& calendar = locate_calendar("America/ANBIMA");
 
 	const auto settlement_date = start_date;
 	const auto face = cpp_dec_float_50{ 1000 };

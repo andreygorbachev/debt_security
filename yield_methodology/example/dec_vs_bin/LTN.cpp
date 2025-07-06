@@ -51,7 +51,7 @@ using namespace debt_security;
 
 int main()
 {
-	const auto& calendar = make_ANBIMA_calendar();
+	const auto& calendar = locate_calendar("America/ANBIMA");
 
 	constexpr auto issue_date = 2008y / May / 21d;
 	constexpr auto maturity_date = 2010y / July / 1d;
