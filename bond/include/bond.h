@@ -159,7 +159,7 @@ namespace debt_security
 		const auto& end_dates = coupon_schedule().get_dates();
 		for (const auto& end_date : end_dates) // test only - should skip the first date, which is a coupon start date
 		{
-			const auto payment_date = f.adjust(end_date, cal_);
+			const auto payment_date = f.adjust(end_date, cal_); // this must be more elegant with ranges
 			result.emplace_back(payment_date, 0.0); // test only
 		}
 
