@@ -62,6 +62,9 @@ namespace debt_security
 
 	public:
 
+		auto coupon_schedule() const -> gregorian::schedule;
+		// this includes all start and end dates
+
 		auto cash_flow() const -> std::vector<fin_calendar::cash_flow<T>>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
 		// is vector a correct data structure to capture the flows?
 
@@ -133,6 +136,13 @@ namespace debt_security
 	}
 
 
+	template<typename T>
+	auto bond<T>::coupon_schedule() const -> gregorian::schedule // do we want to cache this? (and return a const reference?)
+	{
+		return gregorian::schedule{ { issue_date_, maturity_date_ } }; // test only
+	}
+
+
 	// should it be called cash_flows? (ot just flows?)
 	template<typename T>
 	auto bond<T>::cash_flow() const -> std::vector<fin_calendar::cash_flow<T>> // do we want to cache this? (and return a const reference?)
@@ -142,7 +152,7 @@ namespace debt_security
 		const auto f = fin_calendar::following{};
 		const auto payment_date = f.adjust(maturity_date_, cal_);
 
-		result.emplace_back(payment_date, face_);
+		result.emplace_back(payment_date, face_); // at the moment we handle the coupon and principal payment separately, so we have multiple entries for the same date
 
 		return result;
 	}

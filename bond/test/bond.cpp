@@ -59,6 +59,26 @@ namespace debt_security
 		EXPECT_EQ(b.get_face(), face);
 	}
 
+	TEST(bond, coupon_schedule1)
+	{
+		const auto issue_date = 2008y / January / 1d;
+		const auto maturity_date = 2014y / January / 1d;
+		const auto frequency = SemiAnnual;
+		const auto coupon = 10.0;
+		const auto& calendar = make_calendar_ANBIMA();
+		const auto face = 1000.0;
+		const auto b = bond{
+			issue_date,
+			maturity_date,
+			frequency,
+			coupon,
+			calendar,
+			face
+		};
+
+		const auto s = b.coupon_schedule();
+	}
+
 	TEST(bond, cash_flow1)
 	{
 		const auto issue_date = 2008y / January / 1d;
