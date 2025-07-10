@@ -15,7 +15,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   fin-calendar_business-day-convention # should probably be FinCalendar::business-day-convention
   fin-calendar_day-count # should probably be FinCalendar::day-count
   reset
-  Boost::config
+  Boost::config # only shold be here if decimals are always used
   Boost::multiprecision
 )
 
