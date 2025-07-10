@@ -26,8 +26,14 @@
 
 #include <gtest/gtest.h>
 
+#include <array>
+#include <ranges>
+
 using namespace std;
 using namespace std::chrono;
+using namespace std::views;
+using namespace gregorian;
+using namespace gregorian::util;
 using namespace fin_calendar;
 
 
@@ -98,6 +104,57 @@ namespace debt_security
 	}
 
 	TEST(bond, cash_flow1)
+	{
+		const auto issue_date = 2008y / January / 1d;
+		const auto maturity_date = 2014y / January / 1d;
+		const auto frequency = SemiAnnual;
+		const auto coupon = 10.0;
+		const auto& calendar = make_calendar_ANBIMA();
+		const auto face = 1000.0;
+		const auto b = bond{
+			issue_date,
+			maturity_date,
+			frequency,
+			coupon,
+			calendar,
+			face
+		};
+
+		const auto settlement_date = 2008y / May / 21d;
+
+		const auto expected = array{
+			0uz, // dummy value while we have start date in cash flow
+			28uz,
+			159uz,
+			281uz,
+			409uz,
+			532uz,
+			660uz,
+			784uz,
+			911uz,
+			1036uz,
+			1162uz,
+			1285uz,
+			1415uz,
+			1415uz, // as principal is a separate entry
+		};
+
+		const auto cash_flows = b.cash_flow();
+		for (const auto& [cash_flow, e] : zip(cash_flows, expected))
+		{
+			const auto& payment_date = cash_flow.get_payment_date();
+			if (payment_date >= settlement_date) // would not be needed when we got rid of the start date in these flows
+			{
+				const auto calculated = calendar.count_business_days(
+					days_period{ settlement_date, payment_date }
+				) - 1uz; // exclude the payment date itself (or should we decrease the payment_date by 1 day?)
+
+				EXPECT_EQ(e, calculated);
+			}
+		}
+	}
+
+	TEST(bond, cash_flow2)
 	{
 		const auto issue_date = 2008y / January / 1d;
 		const auto maturity_date = 2014y / January / 1d;
