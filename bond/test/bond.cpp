@@ -78,8 +78,8 @@ namespace debt_security
 
 		const auto cf = b.cash_flow();
 
-		EXPECT_EQ(cf.get_payment_date(), 2014y / January / 2d);
-		EXPECT_EQ(cf.get_amount(), face);
+		EXPECT_EQ(cf.back().get_payment_date(), 2014y / January / 2d);
+		EXPECT_EQ(cf.back().get_amount(), face);
 	}
 
 }

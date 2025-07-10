@@ -24,6 +24,7 @@
 
 #include <chrono>
 #include <utility>
+#include <vector>
 
 #include <calendar.h>
 
@@ -61,7 +62,8 @@ namespace debt_security
 
 	public:
 
-		auto cash_flow() const -> fin_calendar::cash_flow<T>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
+		auto cash_flow() const -> std::vector<fin_calendar::cash_flow<T>>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
+		// is vector a correct data structure to capture the flows?
 
 	private:
 
@@ -131,13 +133,18 @@ namespace debt_security
 	}
 
 
+	// should it be called cash_flows? (ot just flows?)
 	template<typename T>
-	auto bond<T>::cash_flow() const -> fin_calendar::cash_flow<T> // do we want to cache this? (and return a const reference?)
+	auto bond<T>::cash_flow() const -> std::vector<fin_calendar::cash_flow<T>> // do we want to cache this? (and return a const reference?)
 	{
+		auto result = std::vector<fin_calendar::cash_flow<T>>{};
+
 		const auto f = fin_calendar::following{};
 		const auto payment_date = f.adjust(maturity_date_, cal_);
 
-		return fin_calendar::cash_flow<T>{ payment_date, face_ };
+		result.emplace_back(payment_date, face_);
+
+		return result;
 	}
 
 }
