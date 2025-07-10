@@ -156,7 +156,7 @@ namespace debt_security
 
 		const auto f = fin_calendar::following{};
 
-		const auto end_dates = coupon_schedule().get_dates();
+		const auto& end_dates = coupon_schedule().get_dates();
 		for (const auto& end_date : end_dates) // test only - should skip the first date, which is a coupon start date
 		{
 			const auto payment_date = f.adjust(end_date, cal_);
