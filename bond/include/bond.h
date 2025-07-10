@@ -26,6 +26,8 @@
 #include <utility>
 #include <vector>
 
+#include <resets_math.h>
+
 #include <calendar.h>
 
 #include <following.h>
@@ -156,11 +158,17 @@ namespace debt_security
 
 		const auto f = fin_calendar::following{};
 
+		const auto coupon_amount = reset::round_dp(
+			face_ * (pow(1.1, 0.5) - 1.0), // test only - should be based on the coupon rate and frequency
+			5u // test only - should not be hard coded
+		);
+		// also need to handle non-Brazil bonds and non-standard periods
+
 		const auto end_dates = coupon_schedule().get_dates();
 		for (const auto& end_date : end_dates) // test only - should skip the first date, which is a coupon start date
 		{
-			const auto payment_date = f.adjust(end_date, cal_); // this must be more elegant with ranges
-			result.emplace_back(payment_date, 0.0); // test only
+			const auto coupon_payment_date = f.adjust(end_date, cal_); // this must be more elegant with ranges
+			result.emplace_back(coupon_payment_date, coupon_amount);
 		}
 
 		const auto principal_payment_date = f.adjust(maturity_date_, cal_); // need a more consistent name?

@@ -11,6 +11,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   fin-calendar_business-day-convention
   fin-calendar_frequency
   fin-calendar_quasi-coupon-dates
+  reset
 )
 
 #export(TARGETS bond NAMESPACE Bond:: FILE Bond.cmake)

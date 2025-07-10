@@ -111,7 +111,7 @@ namespace debt_security
 		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
-		const auto b = bond{
+		const auto b = bond{ // should be decimal for this test
 			issue_date,
 			maturity_date,
 			frequency,
@@ -150,6 +150,10 @@ namespace debt_security
 				) - 1uz; // exclude the payment date itself (or should we decrease the payment_date by 1 day?)
 
 				EXPECT_EQ(e, calculated);
+
+				const auto amount = cash_flow.get_amount();
+				if(amount != face)
+					EXPECT_EQ(48.80885, amount); // only look at the coupons for now
 			}
 		}
 	}
