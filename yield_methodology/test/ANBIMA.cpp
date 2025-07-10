@@ -103,6 +103,10 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		EXPECT_EQ(price, cpp_dec_float_50{ "753.315323" });
 	}
 
+	TEST(ANBIMA, NTN_F1)
+	{
+		// where should the BD tests be? (here on in the instruments?)
+	}
 
 	TEST(ANBIMA, LFT1)
 	{
