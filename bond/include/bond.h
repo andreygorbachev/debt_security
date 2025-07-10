@@ -31,6 +31,7 @@
 #include <following.h>
 #include <cash_flow.h>
 #include <frequency.h>
+#include <quasi_coupon_schedule.h>
 
 
 namespace debt_security

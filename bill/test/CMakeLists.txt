@@ -7,9 +7,6 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
   debt-security_bill
-  calendar
-  fin-calendar_cash-flow
-  fin-calendar_business-day-convention
   GTest::gtest_main
 )
 

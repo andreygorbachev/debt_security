@@ -6,4 +6,11 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
+target_link_libraries(${PROJECT_NAME} INTERFACE
+  fin-calendar_cash-flow
+  fin-calendar_business-day-convention
+  fin-calendar_frequency
+  fin-calendar_quasi-coupon-dates
+)
+
 #export(TARGETS bond NAMESPACE Bond:: FILE Bond.cmake)
