@@ -140,7 +140,11 @@ namespace debt_security
 	template<typename T>
 	auto bond<T>::coupon_schedule() const -> gregorian::schedule // do we want to cache this? (and return a const reference?)
 	{
-		return gregorian::schedule{ { issue_date_, maturity_date_ } }; // test only
+		return fin_calendar::make_quasi_coupon_schedule(
+			gregorian::util::days_period{ issue_date_, maturity_date_ },
+			fin_calendar::duration_variant{ std::chrono::months{ 6 } }, // test only
+			issue_date_ // test only
+		);
 	}
 
 
