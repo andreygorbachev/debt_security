@@ -76,7 +76,25 @@ namespace debt_security
 			face
 		};
 
-		const auto s = b.coupon_schedule();
+		const auto schedule = b.coupon_schedule();
+
+		const auto expected = gregorian::schedule::dates{
+			2008y / January / 1d,
+			2008y / July / 1d,
+			2009y / January / 1d,
+			2009y / July / 1d,
+			2010y / January / 1d,
+			2010y / July / 1d,
+			2011y / January / 1d,
+			2011y / July / 1d,
+			2012y / January / 1d,
+			2012y / July / 1d,
+			2013y / January / 1d,
+			2013y / July / 1d,
+			2014y / January / 1d
+		};
+
+		EXPECT_EQ(expected, schedule.get_dates());
 	}
 
 	TEST(bond, cash_flow1)
