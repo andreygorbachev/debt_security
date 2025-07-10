@@ -155,9 +155,16 @@ namespace debt_security
 		auto result = std::vector<fin_calendar::cash_flow<T>>{};
 
 		const auto f = fin_calendar::following{};
-		const auto payment_date = f.adjust(maturity_date_, cal_);
 
-		result.emplace_back(payment_date, face_); // at the moment we handle the coupon and principal payment separately, so we have multiple entries for the same date
+		const auto end_dates = coupon_schedule().get_dates();
+		for (const auto& end_date : end_dates) // test only - should skip the first date, which is a coupon start date
+		{
+			const auto payment_date = f.adjust(end_date, cal_);
+			result.emplace_back(payment_date, 0.0); // test only
+		}
+
+		const auto principal_payment_date = f.adjust(maturity_date_, cal_); // need a more consistent name?
+		result.emplace_back(principal_payment_date, face_); // at the moment we handle the coupon and principal payment separately, so we have multiple entries for the same date
 
 		return result;
 	}
