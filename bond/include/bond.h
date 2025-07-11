@@ -166,7 +166,7 @@ namespace debt_security
 		// also need to handle non-Brazil bonds and non-standard periods
 
 		const auto dates = coupon_schedule().get_dates(); // I am sure that std::set is not what we want here
-		for (auto end_date : dates | std::views::drop(1)) // we drop the first date as it is a start date
+		for (const auto& end_date : dates | std::views::drop(1)) // we drop the first date as it is a start date
 		{
 			const auto coupon_payment_date = f.adjust(end_date, cal_); // this must be more elegant with ranges
 			result.emplace_back(coupon_payment_date, coupon_amount);
