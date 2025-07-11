@@ -123,7 +123,6 @@ namespace debt_security
 		const auto settlement_date = 2008y / May / 21d;
 
 		const auto expected = array{
-			0uz, // dummy value while we have start date in cash flow
 			28uz,
 			159uz,
 			281uz,
