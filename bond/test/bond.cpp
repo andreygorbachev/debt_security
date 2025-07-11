@@ -135,8 +135,7 @@ namespace debt_security
 			1036uz,
 			1162uz,
 			1285uz,
-			1415uz,
-			1415uz, // as principal is a separate entry
+			1415uz
 		};
 
 		const auto cash_flows = b.cash_flow();
@@ -151,9 +150,7 @@ namespace debt_security
 
 				EXPECT_EQ(e, calculated);
 
-				const auto amount = cash_flow.get_amount();
-				if(amount != face)
-					EXPECT_EQ(48.80885, amount); // only look at the coupons for now
+				EXPECT_EQ(48.80885, cash_flow.get_amount()); // only look at the coupons for now (final principal is an addition cash flow, which is not consideed here)
 			}
 		}
 	}
