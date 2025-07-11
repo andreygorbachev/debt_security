@@ -157,7 +157,7 @@ namespace debt_security
 	{
 		auto result = std::vector<fin_calendar::cash_flow<T>>{};
 
-		const auto f = fin_calendar::following{};
+		constexpr auto f = fin_calendar::following{};
 
 		const auto coupon_amount = reset::round_dp(
 			face_ * (pow(1.1, 0.5) - 1.0), // test only - should be based on the coupon rate and frequency

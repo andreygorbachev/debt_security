@@ -111,7 +111,8 @@ namespace debt_security
 	template<typename T>
 	auto bill<T>::cash_flow() const -> fin_calendar::cash_flow<T> // do we want to cache this? (and return a const reference?)
 	{
-		const auto f = fin_calendar::following{};
+		constexpr auto f = fin_calendar::following{};
+
 		const auto payment_date = f.adjust(maturity_date_, cal_);
 
 		return fin_calendar::cash_flow<T>{ payment_date, face_ };
