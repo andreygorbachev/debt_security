@@ -27,6 +27,7 @@
 #include <calculation_252.h>
 
 #include <bill.h>
+#include <bond.h>
 #include <quote.h>
 
 
@@ -42,6 +43,17 @@ namespace debt_security
 		auto price(
 			const T& yield,
 			const bill<T>& bill,
+			const quote<T>& quote
+		) const -> T;
+
+		// is this what we want? (the same yield methodology for both bill and bond)
+		// they are the same at the level of the cashflows I think, so maybe methodology
+		// should be taking cashflows rather than bill or bond?
+		// or templated?
+		// (we often have a special yield calculations in the last period of the bond, so we should capture that nicely)
+		auto price(
+			const T& yield,
+			const bond<T>& bond,
 			const quote<T>& quote
 		) const -> T;
 
