@@ -52,7 +52,8 @@ namespace debt_security
 			fin_calendar::frequency frequency,
 			T coupon,
 			gregorian::calendar cal, // do we want to copy these everywhere?
-			T face = 100 // do we care for this? (or is it just part of price?) if we do not have it we'll have to have cashflow to be based on a unit notional
+			T face = 100, // do we care for this? (or is it just part of price?) if we do not have it we'll have to have cashflow to be based on a unit notional
+			std::optional<unsigned int> round_flows = std::nullopt
 		) noexcept;
 
 	public:
@@ -63,6 +64,7 @@ namespace debt_security
 		auto get_coupon() const noexcept -> const T&;
 		auto get_calendar() const noexcept -> const gregorian::calendar&;
 		auto get_face() const noexcept -> const T&;
+		auto get_round_flows() const noexcept -> const std::optional<unsigned int>&;
 
 	public:
 
@@ -80,6 +82,7 @@ namespace debt_security
 		T coupon_{};
 		gregorian::calendar cal_{};
 		T face_{};
+		std::optional<unsigned int> round_flows_{};
 
 	};
 
@@ -91,14 +94,16 @@ namespace debt_security
 		fin_calendar::frequency frequency,
 		T coupon, // as quoted on the market so 10% is passed in as 10.0 - have not decided yet if is a good idea, or not
 		gregorian::calendar cal,
-		T face
+		T face,
+		std::optional<unsigned int> round_flows
 	) noexcept :
 		issue_date_{ std::move(issue_date) },
 		maturity_date_{ std::move(maturity_date) },
 		frequency_{ std::move(frequency) },
 		coupon_{ std::move(coupon) },
 		cal_{ std::move(cal) },
-		face_{ std::move(face) }
+		face_{ std::move(face) },
+		round_flows_{ std::move(round_flows) }
 	{
 	}
 
@@ -159,11 +164,12 @@ namespace debt_security
 
 		constexpr auto f = fin_calendar::following{};
 
-		const auto coupon_amount = reset::round_dp(
-			face_ * (pow(T{ 1.1 }, 0.5) - T{ 1.0 }), // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
-			5u // test only - should not be hard coded
-		);
+		const auto coupon_amount_raw =
+			face_ * (pow(T{ 1.1 }, 0.5) - T{ 1.0 }); // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
 		// also need to handle non-Brazil bonds and non-standard periods
+		const auto coupon_amount = round_flows_ ?
+			reset::round_dp(coupon_amount_raw, *round_flows_) :
+			coupon_amount_raw;
 
 		const auto dates = coupon_schedule().get_dates(); // I am sure that std::set is not what we want here
 		for (const auto& end_date : dates | std::views::drop(1)) // we drop the first date as it is a start date

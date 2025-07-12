@@ -48,13 +48,15 @@ namespace debt_security
 		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
+		const auto round_flows = 5u;
 		const auto b = bond{
 			issue_date,
 			maturity_date,
 			frequency,
 			coupon,
 			calendar,
-			face
+			face,
+			round_flows
 		};
 
 		EXPECT_EQ(b.get_issue_date(), issue_date);
@@ -73,13 +75,15 @@ namespace debt_security
 		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
+		const auto round_flows = 5u;
 		const auto b = bond{
 			issue_date,
 			maturity_date,
 			frequency,
 			coupon,
 			calendar,
-			face
+			face,
+			round_flows
 		};
 
 		const auto schedule = b.coupon_schedule();
@@ -111,13 +115,15 @@ namespace debt_security
 		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
+		const auto round_flows = 5u;
 		const auto b = bond{ // should be decimal for this test
 			issue_date,
 			maturity_date,
 			frequency,
 			coupon,
 			calendar,
-			face
+			face,
+			round_flows
 		};
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -162,13 +168,15 @@ namespace debt_security
 		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
+		const auto round_flows = 5u;
 		const auto b = bond{
 			issue_date,
 			maturity_date,
 			frequency,
 			coupon,
 			calendar,
-			face
+			face,
+			round_flows
 		};
 
 		const auto cf = b.cash_flow();

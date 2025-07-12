@@ -117,13 +117,15 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto coupon = 10.0;
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = 1000.0;
+		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,
 			maturity_date,
 			frequency,
 			coupon,
 			calendar,
-			face
+			face,
+			round_flows
 		};
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -147,13 +149,15 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto coupon = cpp_dec_float_50{ 10 };
 		const auto& calendar = make_calendar_ANBIMA();
 		const auto face = cpp_dec_float_50{ 1000 };
+		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,
 			maturity_date,
 			frequency,
 			coupon,
 			calendar,
-			face
+			face,
+			round_flows
 		};
 
 		const auto settlement_date = 2008y / May / 21d;
