@@ -105,7 +105,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 
 	TEST(ANBIMA, NTN_F1)
 	{
-		// where should the BD tests be? (here on in the instruments?)
+		// where should the BD tests be? (here or in the instruments?)
 	}
 
 	TEST(ANBIMA, LFT1)

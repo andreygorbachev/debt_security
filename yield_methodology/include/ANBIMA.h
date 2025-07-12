@@ -82,4 +82,34 @@ namespace debt_security
 			return price;
 	}
 
+
+	template<typename T>
+	auto ANBIMA<T>::price(
+		const T& yield,
+		const bond<T>& bond,
+		const quote<T>& quote
+	) const -> T
+	{
+		const auto cfs = bill.cash_flow();
+
+		const auto dc = fin_calendar::calculation_252{ bill.get_calendar() };
+
+		auto price = T{ 0 };
+		for (const auto& cf : cfs)
+		{
+			const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
+			// we should probably note that end date would give the same year fraction as the end date is not included in the period
+			// and hence unadjusted end date, or following adjusted end date would give the same number of business days
+
+			auto price += cf.get_amount() / pow(T{ 1 } + yield, yf); // we should sum up the amounts on the same date first
+			// there is also a rounding of each discouted value
+		}
+
+		const auto& truncate = quote.get_truncate(); // assuming that 14 decimal places from above will be hard coded, should this also be hard coded?
+		if (truncate)
+			return reset::trunc_dp(price, *truncate);
+		else
+			return price;
+	}
+
 }
