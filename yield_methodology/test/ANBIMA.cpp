@@ -136,6 +136,36 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		EXPECT_EQ(price, 903.075616);
 	}
 
+	TEST(ANBIMA, NTN_F2)
+	{
+		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
+
+		const auto issue_date = 2008y / January / 1d; // made up?
+		const auto maturity_date = 2014y / January / 1d;
+		const auto frequency = SemiAnnual;
+		const auto coupon = cpp_dec_float_50{ 10 };
+		const auto& calendar = make_calendar_ANBIMA();
+		const auto face = cpp_dec_float_50{ 1000 };
+		const auto NTN_F = debt_security::bond{
+			issue_date,
+			maturity_date,
+			frequency,
+			coupon,
+			calendar,
+			face
+		};
+
+		const auto settlement_date = 2008y / May / 21d;
+		const auto truncate = 6u;
+		const auto quote = debt_security::quote{ settlement_date, face, truncate };
+
+		const auto ANBIMA = debt_security::ANBIMA<cpp_dec_float_50>{};
+
+		const auto yield = from_percent(cpp_dec_float_50{ "13.66" });
+		const auto price = ANBIMA.price(yield, NTN_F, quote);
+		EXPECT_EQ(price, cpp_dec_float_50{ "903.075616" });
+	}
+
 	TEST(ANBIMA, LFT1)
 	{
 		// from "Metodologia de Cálculo dos Títulos Públicos Federais Ofertados nos Leilões Primários"
