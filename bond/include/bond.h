@@ -160,7 +160,7 @@ namespace debt_security
 		constexpr auto f = fin_calendar::following{};
 
 		const auto coupon_amount = reset::round_dp(
-			face_ * (pow(T{ 1.1 }, 0.5) - T{ 1.0 }), // test only - should be based on the coupon rate and frequency // what about the type of the second argument?
+			face_ * (pow(T{ 1.1 }, 0.5) - T{ 1.0 }), // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
 			5u // test only - should not be hard coded
 		);
 		// also need to handle non-Brazil bonds and non-standard periods
