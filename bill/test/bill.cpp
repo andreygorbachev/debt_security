@@ -20,14 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "setup.h"
-
 #include <bill.h>
+
+#include <static_data.h>
 
 #include <gtest/gtest.h>
 
+#include <string>
+
 using namespace std;
 using namespace std::chrono;
+using namespace gregorian::static_data;
 
 
 namespace debt_security
@@ -37,7 +40,7 @@ namespace debt_security
 	{
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
-		const auto& calendar = make_calendar_ANBIMA();
+		const auto& calendar = locate_calendar("America/ANBIMA"s);
 		const auto face = 1000.0;
 		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
@@ -51,7 +54,7 @@ namespace debt_security
 	{
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
-		const auto& calendar = make_calendar_ANBIMA();
+		const auto& calendar = locate_calendar("America/ANBIMA"s);
 		const auto face = 1000.0;
 		const auto b = bill{ issue_date, maturity_date, calendar, face };
 

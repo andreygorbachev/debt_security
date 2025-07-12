@@ -20,12 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "setup.h"
-
 #include <bond.h>
+
+#include <static_data.h>
 
 #include <gtest/gtest.h>
 
+#include <string>
 #include <array>
 #include <ranges>
 
@@ -35,6 +36,7 @@ using namespace std::views;
 using namespace gregorian;
 using namespace gregorian::util;
 using namespace fin_calendar;
+using namespace gregorian::static_data;
 
 
 namespace debt_security
@@ -46,7 +48,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = make_calendar_ANBIMA();
+		const auto& calendar = locate_calendar("America/ANBIMA"s);
 		const auto face = 1000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
@@ -73,7 +75,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = make_calendar_ANBIMA();
+		const auto& calendar = locate_calendar("America/ANBIMA"s);
 		const auto face = 1000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
@@ -113,7 +115,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = make_calendar_ANBIMA();
+		const auto& calendar = locate_calendar("America/ANBIMA"s);
 		const auto face = 1000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{ // should be decimal for this test
@@ -166,7 +168,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = make_calendar_ANBIMA();
+		const auto& calendar = locate_calendar("America/ANBIMA"s);
 		const auto face = 1000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
