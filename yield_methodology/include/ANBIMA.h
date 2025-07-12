@@ -90,9 +90,9 @@ namespace debt_security
 		const quote<T>& quote
 	) const -> T
 	{
-		const auto cfs = bill.cash_flow();
+		const auto cfs = bond.cash_flow();
 
-		const auto dc = fin_calendar::calculation_252{ bill.get_calendar() };
+		const auto dc = fin_calendar::calculation_252{ bond.get_calendar() };
 
 		auto price = T{ 0 };
 		for (const auto& cf : cfs)
@@ -101,8 +101,8 @@ namespace debt_security
 			// we should probably note that end date would give the same year fraction as the end date is not included in the period
 			// and hence unadjusted end date, or following adjusted end date would give the same number of business days
 
-			auto price += cf.get_amount() / pow(T{ 1 } + yield, yf); // we should sum up the amounts on the same date first
-			// there is also a rounding of each discouted value
+			price += cf.get_amount() / pow(T{ 1 } + yield, yf); // we should sum up the amounts on the same date first
+			// there is also a rounding of each discounted value
 		}
 
 		const auto& truncate = quote.get_truncate(); // assuming that 14 decimal places from above will be hard coded, should this also be hard coded?
