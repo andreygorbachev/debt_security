@@ -26,6 +26,7 @@
 #include <utility>
 #include <vector>
 #include <ranges>
+#include <optional>
 
 #include <resets_math.h>
 
