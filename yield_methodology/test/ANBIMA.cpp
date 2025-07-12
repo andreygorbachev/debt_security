@@ -106,6 +106,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 	}
 
 	// where should the BD tests be? (here or in the instruments?)
+	// we also have PV of individual flows in the paper - should we also test them somwhow?
 	TEST(ANBIMA, NTN_F1)
 	{
 		// from "Methodology for Calculating Federal Government Bonds Offered in Primary Auctions"
