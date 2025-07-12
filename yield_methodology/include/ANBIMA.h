@@ -110,6 +110,8 @@ namespace debt_security
 			return reset::trunc_dp(price, *truncate);
 		else
 			return price;
+
+		// do we also need a notion of the currency? (to capture "Financial value" truncation)
 	}
 
 }
