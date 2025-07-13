@@ -41,7 +41,7 @@ namespace debt_security
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
 		EXPECT_EQ(b.get_issue_date(), issue_date);
@@ -55,7 +55,7 @@ namespace debt_security
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
 		const auto cf = b.cash_flow();

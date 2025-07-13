@@ -49,7 +49,7 @@ namespace debt_security
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
 			issue_date,
@@ -76,7 +76,7 @@ namespace debt_security
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
 			issue_date,
@@ -116,7 +116,7 @@ namespace debt_security
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{ // should be decimal for this test
 			issue_date,
@@ -169,7 +169,7 @@ namespace debt_security
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
 			issue_date,

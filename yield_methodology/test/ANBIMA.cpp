@@ -58,7 +58,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -86,7 +86,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = cpp_dec_float_50{ 1000 };
+		const auto face = cpp_dec_float_50{ 1'000 };
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -118,7 +118,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = 1000.0;
+		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,
@@ -150,7 +150,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto frequency = SemiAnnual;
 		const auto coupon = cpp_dec_float_50{ 10 };
 		const auto& calendar = locate_calendar("America/ANBIMA"s);
-		const auto face = cpp_dec_float_50{ 1000 };
+		const auto face = cpp_dec_float_50{ 1'000 };
 		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,

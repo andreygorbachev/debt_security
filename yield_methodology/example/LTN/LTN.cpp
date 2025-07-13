@@ -53,7 +53,7 @@ int main()
 	const auto& calendar = locate_calendar("America/ANBIMA");
 
 	const auto settlement_date = start_date;
-	const auto face = cpp_dec_float_50{ 1000 };
+	const auto face = cpp_dec_float_50{ 1'000 };
 	const auto truncate = 6u;
 	const auto q = quote<cpp_dec_float_50>{ settlement_date, face, truncate };
 
