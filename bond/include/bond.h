@@ -145,6 +145,12 @@ namespace debt_security
 		return face_;
 	}
 
+	template<typename T>
+	auto bond<T>::get_round_flows() const noexcept -> const std::optional<unsigned int>&
+	{
+		return round_flows;
+	}
+
 
 	template<typename T>
 	auto bond<T>::coupon_schedule() const -> gregorian::schedule // do we want to cache this? (and return a const reference?)
