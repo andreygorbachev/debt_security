@@ -73,7 +73,8 @@ namespace debt_security
 		// this includes all start and end dates
 
 		auto cash_flow() const -> std::vector<fin_calendar::cash_flow<T>>; // should we also return a cashflow at the issuance going the other way? (for that we'll need to capture issue price somehow)
-		// is vector a correct data structure to capture the flows?
+		// is vector a correct container to capture the flows?
+		// probably something like flat_multiset would be better, but we do not have it yet
 
 	private:
 
