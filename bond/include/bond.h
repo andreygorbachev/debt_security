@@ -149,7 +149,7 @@ namespace debt_security
 	template<typename T>
 	auto bond<T>::get_round_flows() const noexcept -> const std::optional<unsigned int>&
 	{
-		return round_flows;
+		return round_flows_;
 	}
 
 
