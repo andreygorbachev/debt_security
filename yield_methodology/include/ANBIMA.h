@@ -69,13 +69,15 @@ namespace debt_security
 	{
 		const auto cf = bill.cash_flow();
 		const auto dc = fin_calendar::calculation_252{ bill.get_calendar() };
-		const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
+		/*const*/ auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date());
 		// we should probably note that end date would give the same year fraction as the end date is not included in the period
 		// and hence unadjusted end date, or following adjusted end date would give the same number of business days
 
+		yf = reset::trunc_dp(yf, 14u); // ok to hard code this?
+
 		const auto price = quote.get_face() / pow(T{ 1 } + yield, yf); // should we use amount from the cashflow?
 
-		const auto& truncate = quote.get_truncate(); // assuming that 14 decimal places from above will be hard coded, should this also be hard coded?
+		const auto& truncate = quote.get_truncate(); // should this also be hard coded?
 		if (truncate)
 			return reset::trunc_dp(price, *truncate);
 		else
@@ -97,15 +99,17 @@ namespace debt_security
 		auto price = T{ 0 };
 		for (const auto& cf : cfs)
 		{
-			const auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date()); // should be truncated to 14 decimal places
+			/*const*/ auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date());
 			// we should probably note that end date would give the same year fraction as the end date is not included in the period
 			// and hence unadjusted end date, or following adjusted end date would give the same number of business days
+
+			yf = reset::trunc_dp(yf, 14u); // ok to hard code this?
 
 			price += cf.get_amount() / pow(T{ 1 } + yield, yf); // we should sum up the amounts on the same date first
 			// there is also a rounding of each discounted value
 		}
 
-		const auto& truncate = quote.get_truncate(); // assuming that 14 decimal places from above will be hard coded, should this also be hard coded?
+		const auto& truncate = quote.get_truncate(); // should this also be hard coded?
 		if (truncate)
 			return reset::trunc_dp(price, *truncate);
 		else
