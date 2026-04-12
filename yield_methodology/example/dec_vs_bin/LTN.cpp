@@ -22,8 +22,8 @@
 
 #include <chrono>
 #include <iostream>
-#include <limits>
-#include <cmath>
+#include <iomanip>
+#include <cstdlib>
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
@@ -51,7 +51,7 @@ using namespace debt_security;
 
 int main()
 {
-	const auto& calendar = locate_calendar("America/ANBIMA");
+	const auto& calendar = locate_calendar("America/ANBIMA", 2008y / May / 21d);
 
 	constexpr auto issue_date = 2008y / May / 21d;
 	constexpr auto maturity_date = 2010y / July / 1d;

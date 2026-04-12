@@ -22,7 +22,7 @@
 
 #include <chrono>
 #include <iostream>
-#include <limits>
+#include <iomanip>
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 
@@ -50,7 +50,7 @@ constexpr auto number_of_bills = 365 * 50;
 
 int main()
 {
-	const auto& calendar = locate_calendar("America/ANBIMA");
+	const auto& calendar = locate_calendar("America/ANBIMA", 2025y / June / 26d);
 
 	const auto settlement_date = start_date;
 	const auto face = cpp_dec_float_50{ 1'000 };

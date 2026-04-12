@@ -22,11 +22,15 @@
 
 #include <bond.h>
 
+#include <frequency.h>
+
 #include <static_data.h>
+#include <schedule.h>
+#include <period.h>
 
 #include <gtest/gtest.h>
 
-#include <string>
+#include <chrono>
 #include <array>
 #include <ranges>
 
@@ -48,7 +52,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = locate_calendar("America/ANBIMA"s);
+		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d); // better as of date?
 		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
@@ -75,7 +79,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = locate_calendar("America/ANBIMA"s);
+		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d);
 		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{
@@ -115,7 +119,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = locate_calendar("America/ANBIMA"s);
+		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d);
 		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{ // should be decimal for this test
@@ -168,7 +172,7 @@ namespace debt_security
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10.0;
-		const auto& calendar = locate_calendar("America/ANBIMA"s);
+		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d);
 		const auto face = 1'000.0;
 		const auto round_flows = 5u;
 		const auto b = bond{

@@ -26,7 +26,7 @@
 
 #include <gtest/gtest.h>
 
-#include <string>
+#include <chrono>
 
 using namespace std;
 using namespace std::chrono;
@@ -40,7 +40,7 @@ namespace debt_security
 	{
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
-		const auto& calendar = locate_calendar("America/ANBIMA"s);
+		const auto& calendar = locate_calendar("America/ANBIMA", 2025y / January / 1d);
 		const auto face = 1'000.0;
 		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
@@ -54,7 +54,7 @@ namespace debt_security
 	{
 		const auto issue_date = 2025y / January / 1d;
 		const auto maturity_date = 2025y / February / 1d;
-		const auto& calendar = locate_calendar("America/ANBIMA"s);
+		const auto& calendar = locate_calendar("America/ANBIMA", 2025y / January / 1d);
 		const auto face = 1'000.0;
 		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
