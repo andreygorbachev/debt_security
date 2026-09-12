@@ -30,11 +30,13 @@
 
 #include <reset_math.h>
 
+#include <period.h>
 #include <calendar.h>
 
 #include <following.h>
 #include <cash_flow.h>
 #include <frequency.h>
+#include <duration_variant.h>
 #include <quasi_coupon_schedule.h>
 
 
