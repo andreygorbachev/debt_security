@@ -164,6 +164,13 @@ namespace debt_security
 	}
 
 
+	template<typename T>
+	auto from_percent(const T& x) -> T // need to think how this should be structured batter
+	{
+		return x / T{ 100 };
+	}
+
+
 	// should it be called cash_flows? (ot just flows?)
 	template<typename T>
 	auto bond<T>::cash_flow() const -> std::vector<fin_calendar::cash_flow<T>> // do we want to cache this? (and return a const reference?)
@@ -174,7 +181,7 @@ namespace debt_security
 
 		const auto one = T{ 1 }; // constexpr would be better, but cpp_dec_float_50 does not support it
 		const auto coupon_amount_raw =
-			face_ * (pow(one + reset::from_percent(coupon_), 0.5) - one); // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
+			face_ * (pow(one + from_percent(coupon_), 0.5) - one); // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
 		// also need to handle non-Brazil bonds and non-standard periods
 		const auto coupon_amount = round_flows_ ?
 			reset::round_dp(coupon_amount_raw, *round_flows_) :
