@@ -24,7 +24,7 @@
 #include <iostream>
 #include <iomanip>
 
-#include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/decimal.hpp>
 
 #include <reset_math.h>
 
@@ -36,7 +36,7 @@
 
 using namespace std;
 using namespace std::chrono;
-using namespace boost::multiprecision;
+using namespace boost::decimal;
 using namespace gregorian;
 using namespace gregorian::static_data;
 using namespace reset;
@@ -45,7 +45,7 @@ using namespace debt_security;
 
 constexpr auto start_date = 2025y / June / 26d;
 constexpr auto number_of_bills = 365 * 50;
-/*constexpr*/ const auto yield = cpp_dec_float_50{ 10 };
+/*constexpr*/ const auto yield = decimal128_t{ 10 };
 
 
 int main()
@@ -53,23 +53,23 @@ int main()
 	const auto& calendar = locate_calendar("America/ANBIMA", 2025y / June / 26d);
 
 	const auto settlement_date = start_date;
-	const auto face = cpp_dec_float_50{ 1'000 };
+	const auto face = decimal128_t{ 1'000 };
 	const auto truncate = 6u;
-	const auto q = quote<cpp_dec_float_50>{ settlement_date, face, truncate };
+	const auto q = quote<decimal128_t>{ settlement_date, face, truncate };
 
-	const auto ym = ANBIMA<cpp_dec_float_50>{};
+	const auto ym = ANBIMA<decimal128_t>{};
 
 	const auto issue_date = start_date;
 	for (auto i = 0; i < number_of_bills; ++i)
 	{
 		const auto maturity_date = year_month_day{ sys_days{ issue_date } + days{ i + 1 } };
-		const auto b = bill<cpp_dec_float_50>{ issue_date, maturity_date, calendar, face };
+		const auto b = bill<decimal128_t>{ issue_date, maturity_date, calendar, face };
 
 		const auto y = from_percent(yield);
 		const auto price = ym.price(y, b, q);
 
 		cout
-			<< setprecision(numeric_limits<cpp_dec_float_50>::max_digits10)
+			<< setprecision(numeric_limits<decimal128_t>::max_digits10)
 			<< "Issue date: " << issue_date
 			<< ", Maturity date: " << maturity_date
 			<< ", Yield: " << yield

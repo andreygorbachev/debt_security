@@ -25,7 +25,7 @@
 #include <iomanip>
 #include <cstdlib>
 
-#include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/decimal.hpp>
 
 #include <reset_math.h>
 
@@ -37,16 +37,16 @@
 
 using namespace std;
 using namespace std::chrono;
-using namespace boost::multiprecision;
+using namespace boost::decimal;
 using namespace gregorian;
 using namespace gregorian::static_data;
 using namespace reset;
 using namespace debt_security;
 
 
-/*constexpr*/ const auto min_yield = cpp_dec_float_50{ "5.0000" };
-/*constexpr*/ const auto max_yield = cpp_dec_float_50{ "15.0000" };
-/*constexpr*/ const auto yield_step = cpp_dec_float_50{ "0.0001" };
+/*constexpr*/ const auto min_yield = decimal128_t{ "5.0000" };
+/*constexpr*/ const auto max_yield = decimal128_t{ "15.0000" };
+/*constexpr*/ const auto yield_step = decimal128_t{ "0.0001" };
 
 
 int main()
@@ -55,16 +55,16 @@ int main()
 
 	constexpr auto issue_date = 2008y / May / 21d;
 	constexpr auto maturity_date = 2010y / July / 1d;
-	const auto face = cpp_dec_float_50{ 1'000 };
-	const auto b_dec = bill<cpp_dec_float_50>{ issue_date, maturity_date, calendar, face };
+	const auto face = decimal128_t{ 1'000 };
+	const auto b_dec = bill<decimal128_t>{ issue_date, maturity_date, calendar, face };
 	const auto b_bin = bill<double>{ issue_date, maturity_date, calendar, static_cast<double>(face) };
 
 	const auto settlement_date = issue_date;
 	const auto price_truncate = 6u;
-	const auto q_dec = quote<cpp_dec_float_50>{ settlement_date, face, price_truncate };
+	const auto q_dec = quote<decimal128_t>{ settlement_date, face, price_truncate };
 	const auto q_bin = quote<double>{ settlement_date, static_cast<double>(face), price_truncate };
 
-	const auto ym_dec = debt_security::ANBIMA<cpp_dec_float_50>{};
+	const auto ym_dec = debt_security::ANBIMA<decimal128_t>{};
 	const auto ym_bin = debt_security::ANBIMA<double>{};
 
 	auto diff = 0.0;
@@ -84,7 +84,7 @@ int main()
 			diff = new_diff;
 
 			cout
-				<< setprecision(numeric_limits<cpp_dec_float_50>::max_digits10)
+				<< setprecision(numeric_limits<decimal128_t>::max_digits10)
 				<< "New largest diff: " << diff << " for yield: " << yield
 				<< ", Price (decimal): " << p_dec << ", Price (binary): " << p_bin << endl;
 		}

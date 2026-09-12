@@ -14,8 +14,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   calendar
   fin-calendar_day-count # should probably be FinCalendar::day-count
   reset
-  Boost::config # only shold be here if decimals are always used
-  Boost::multiprecision
+  Boost::decimal # only should be here if decimals are always used
 )
 
 #export(TARGETS yield-methodology NAMESPACE YieldMethodology:: FILE YieldMethodology.cmake)

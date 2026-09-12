@@ -179,9 +179,10 @@ namespace debt_security
 
 		constexpr auto f = fin_calendar::following{};
 
-		const auto one = T{ 1 }; // constexpr would be better, but cpp_dec_float_50 does not support it
+		constexpr auto one = T{ 1 };
+		constexpr auto half = one / T{ 2 };
 		const auto coupon_amount_raw =
-			face_ * (pow(one + from_percent(coupon_), 0.5) - one); // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
+			face_ * (pow(one + from_percent(coupon_), half) - one); // test only - should be based on the coupon rate and frequency // what about the type of the second argument of pow?
 		// also need to handle non-Brazil bonds and non-standard periods
 		const auto coupon_amount = round_flows_ ?
 			reset::round_dp(coupon_amount_raw, *round_flows_) :

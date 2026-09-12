@@ -68,7 +68,7 @@ namespace debt_security
 	) const -> T
 	{
 		const auto cf = bill.cash_flow();
-		const auto dc = fin_calendar::calculation_252{ bill.get_calendar() };
+		const auto dc = fin_calendar::calculation_252<T>{ bill.get_calendar() };
 		/*const*/ auto yf = dc.fraction(quote.get_settlement_date(), cf.get_payment_date());
 		// we should probably note that end date would give the same year fraction as the end date is not included in the period
 		// and hence unadjusted end date, or following adjusted end date would give the same number of business days
@@ -94,7 +94,7 @@ namespace debt_security
 	{
 		const auto cfs = bond.cash_flow();
 
-		const auto dc = fin_calendar::calculation_252{ bond.get_calendar() };
+		const auto dc = fin_calendar::calculation_252<T>{ bond.get_calendar() };
 
 		auto price = T{ 0 };
 		for (const auto& cf : cfs)

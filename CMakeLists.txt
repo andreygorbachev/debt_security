@@ -37,20 +37,13 @@ FetchContent_MakeAvailable(
 )
 
 FetchContent_Declare(
-  Boost_config
-  GIT_REPOSITORY https://github.com/boostorg/config.git
-  GIT_TAG        boost-1.88.0
-)
-
-FetchContent_Declare(
-  Boost_multiprecision
-  GIT_REPOSITORY https://github.com/boostorg/multiprecision.git # should this project and all its dependencies use decimal only? (no templating for double, float, etc.)
-  GIT_TAG        boost-1.88.0
+  Boost_decimal
+  GIT_REPOSITORY https://github.com/boostorg/decimal.git
+  GIT_TAG        boost-1.92.0
 )
 
 FetchContent_MakeAvailable(
-  Boost_config
-  Boost_multiprecision
+  boost_decimal
 )
 
 option(DEBT-SECURITY_BUILD_TESTS_AND_EXAMPLES "Build all of debt-security's own tests and examples." On)

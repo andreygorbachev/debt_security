@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <boost/multiprecision/cpp_dec_float.hpp>
+#include <boost/decimal.hpp>
 
 #include <ANBIMA.h>
 #include <bill.h>
@@ -42,7 +42,7 @@
 
 using namespace std;
 using namespace std::chrono;
-using namespace boost::multiprecision;
+using namespace boost::decimal;
 using namespace gregorian;
 using namespace gregorian::util;
 using namespace fin_calendar;
@@ -88,14 +88,14 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2007y / July / 1d);
-		const auto face = cpp_dec_float_50{ 1'000 };
+		const auto face = decimal128_t{ 1'000 };
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
 		const auto truncate = 6u;
 		const auto quote = debt_security::quote{ settlement_date, face, truncate };
 
-		const auto ANBIMA = debt_security::ANBIMA<cpp_dec_float_50>{};
+		const auto ANBIMA = debt_security::ANBIMA<decimal128_t>{};
 
 		// check the setup of the test first
 		const auto bd = calendar.count_business_days(days_period{
@@ -104,9 +104,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		});
 		EXPECT_EQ(bd, 532/*zu*/);
 
-		const auto yield = from_percent(cpp_dec_float_50{ "14.36" });
+		const auto yield = from_percent(decimal128_t{ "14.36" });
 		const auto price = ANBIMA.price(yield, LTN, quote);
-		EXPECT_EQ(price, cpp_dec_float_50{ "753.315323" });
+		EXPECT_EQ(price, decimal128_t{ "753.315323" });
 	}
 
 	// where should the BD tests be? (here or in the instruments?)
@@ -150,9 +150,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2008y / January / 1d; // made up?
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
-		const auto coupon = cpp_dec_float_50{ 10 };
+		const auto coupon = decimal128_t{ 10 };
 		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d);
-		const auto face = cpp_dec_float_50{ 1'000 };
+		const auto face = decimal128_t{ 1'000 };
 		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,
@@ -168,11 +168,11 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto truncate = 6u;
 		const auto quote = debt_security::quote{ settlement_date, face, truncate };
 
-		const auto ANBIMA = debt_security::ANBIMA<cpp_dec_float_50>{};
+		const auto ANBIMA = debt_security::ANBIMA<decimal128_t>{};
 
-		const auto yield = from_percent(cpp_dec_float_50{ "13.66" });
+		const auto yield = from_percent(decimal128_t{ "13.66" });
 		const auto price = ANBIMA.price(yield, NTN_F, quote);
-		EXPECT_EQ(price, cpp_dec_float_50{ "903.075616" });
+		EXPECT_EQ(price, decimal128_t{ "903.075616" });
 	}
 
 	TEST(ANBIMA, LFT1)
@@ -210,14 +210,14 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2000y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2014y / March / 7d;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2014y / March / 7d);
-		const auto face = cpp_dec_float_50{ 100 };
+		const auto face = decimal128_t{ 100 };
 		const auto LFT = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
 		const auto truncate = 4u;
 		const auto quote = debt_security::quote{ settlement_date, face, truncate };
 
-		const auto ANBIMA = debt_security::ANBIMA<cpp_dec_float_50>{};
+		const auto ANBIMA = debt_security::ANBIMA<decimal128_t>{};
 
 		// check the setup of the test first
 		const auto bd = calendar.count_business_days(days_period{
@@ -226,9 +226,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		});
 		EXPECT_EQ(bd, 1459/*zu*/);
 
-		const auto yield = from_percent(cpp_dec_float_50{ "-0.02" });
+		const auto yield = from_percent(decimal128_t{ "-0.02" });
 		const auto price = ANBIMA.price(yield, LFT, quote);
-		EXPECT_EQ(price, cpp_dec_float_50{ "100.1158" });
+		EXPECT_EQ(price, decimal128_t{ "100.1158" });
 	}
 
 }
