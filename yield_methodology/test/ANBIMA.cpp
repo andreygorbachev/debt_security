@@ -29,7 +29,7 @@
 
 #include <frequency.h>
 
-#include <resets_math.h>
+#include <reset_math.h>
 
 #include <period.h>
 
