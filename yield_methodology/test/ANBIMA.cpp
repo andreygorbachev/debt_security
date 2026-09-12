@@ -196,7 +196,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 			settlement_date,
 			sys_days{ maturity_date } - days{ 1 } // "end date" should be excluded
 		});
-		EXPECT_EQ(bd, 1459/*zu*/);
+		EXPECT_EQ(bd, 1459zu);
 
 		const auto yield = from_percent(-0.02);
 		const auto price = ANBIMA.price(yield, LFT, quote);
@@ -224,7 +224,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 			settlement_date,
 			sys_days{ maturity_date } - days{ 1 } // "end date" should be excluded
 		});
-		EXPECT_EQ(bd, 1459/*zu*/);
+		EXPECT_EQ(bd, 1459zu);
 
 		const auto yield = from_percent(decimal128_t{ "-0.02" });
 		const auto price = ANBIMA.price(yield, LFT, quote);
