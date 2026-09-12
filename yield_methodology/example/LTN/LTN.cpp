@@ -26,8 +26,6 @@
 
 #include <boost/decimal.hpp>
 
-#include <reset_math.h>
-
 #include <static_data.h>
 
 #include <ANBIMA.h>
