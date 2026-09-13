@@ -35,6 +35,7 @@
 using namespace std;
 using namespace std::chrono;
 using namespace boost::decimal;
+using namespace boost::decimal::literals;
 using namespace gregorian;
 using namespace gregorian::static_data;
 using namespace reset;
@@ -43,7 +44,7 @@ using namespace debt_security;
 
 constexpr auto start_date = 2025y / June / 26d;
 constexpr auto number_of_bills = 365 * 50;
-/*constexpr*/ const auto yield = decimal128_t{ 10 };
+constexpr auto yield = 10_dl;
 
 
 int main()
@@ -51,9 +52,9 @@ int main()
 	const auto& calendar = locate_calendar("America/ANBIMA", 2025y / June / 26d);
 
 	const auto settlement_date = start_date;
-	const auto face = decimal128_t{ 1'000 };
+	const auto face = 1'000_dl;
 	const auto truncate = 6u;
-	const auto q = quote<decimal128_t>{ settlement_date, face, truncate };
+	const auto q = quote{ settlement_date, face, truncate };
 
 	const auto ym = ANBIMA<decimal128_t>{};
 
@@ -61,7 +62,7 @@ int main()
 	for (auto i = 0; i < number_of_bills; ++i)
 	{
 		const auto maturity_date = year_month_day{ sys_days{ issue_date } + days{ i + 1 } };
-		const auto b = bill<decimal128_t>{ issue_date, maturity_date, calendar, face };
+		const auto b = bill{ issue_date, maturity_date, calendar, face };
 
 		const auto y = from_percent(yield);
 		const auto price = ym.price(y, b, q);

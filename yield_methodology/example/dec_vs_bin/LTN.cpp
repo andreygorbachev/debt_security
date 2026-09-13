@@ -38,15 +38,16 @@
 using namespace std;
 using namespace std::chrono;
 using namespace boost::decimal;
+using namespace boost::decimal::literals;
 using namespace gregorian;
 using namespace gregorian::static_data;
 using namespace reset;
 using namespace debt_security;
 
 
-/*constexpr*/ const auto min_yield = decimal128_t{ "5.0000" };
-/*constexpr*/ const auto max_yield = decimal128_t{ "15.0000" };
-/*constexpr*/ const auto yield_step = decimal128_t{ "0.0001" };
+constexpr auto min_yield = 5.0000_dl;
+constexpr auto max_yield = 15.0000_dl;
+constexpr auto yield_step = 0.0001_dl;
 
 
 int main()
@@ -55,19 +56,19 @@ int main()
 
 	constexpr auto issue_date = 2008y / May / 21d;
 	constexpr auto maturity_date = 2010y / July / 1d;
-	const auto face = decimal128_t{ 1'000 };
-	const auto b_dec = bill<decimal128_t>{ issue_date, maturity_date, calendar, face };
-	const auto b_bin = bill<double>{ issue_date, maturity_date, calendar, static_cast<double>(face) };
+	constexpr auto face = 1'000_dl;
+	const auto b_dec = bill{ issue_date, maturity_date, calendar, face };
+	const auto b_bin = bill{ issue_date, maturity_date, calendar, static_cast<double>(face) };
 
 	const auto settlement_date = issue_date;
 	const auto price_truncate = 6u;
-	const auto q_dec = quote<decimal128_t>{ settlement_date, face, price_truncate };
-	const auto q_bin = quote<double>{ settlement_date, static_cast<double>(face), price_truncate };
+	const auto q_dec = quote{ settlement_date, face, price_truncate };
+	const auto q_bin = quote{ settlement_date, static_cast<double>(face), price_truncate };
 
 	const auto ym_dec = debt_security::ANBIMA<decimal128_t>{};
 	const auto ym_bin = debt_security::ANBIMA<double>{};
 
-	auto diff = 0.0;
+	auto diff = 0.0; // or should we do the diff as decimal?
 	for (auto yield = min_yield; yield <= max_yield; yield += yield_step)
 	{
 		const auto yield_truncate = 4u;
@@ -75,7 +76,7 @@ int main()
 		const auto y_dec = from_percent(trunc_dp(yield, yield_truncate));
 		const auto p_dec = ym_dec.price(y_dec, b_dec, q_dec);
 
-		const auto y_bin = from_percent(trunc_dp(static_cast<double>(yield), yield_truncate)); // do we need to go via std::string?
+		const auto y_bin = from_percent(trunc_dp(static_cast<double>(yield), yield_truncate));
 		const auto p_bin = ym_bin.price(y_bin, b_bin, q_bin);
 
 		const auto new_diff = abs(static_cast<double>(p_dec) - p_bin);
