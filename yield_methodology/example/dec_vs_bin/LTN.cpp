@@ -68,7 +68,7 @@ int main()
 	const auto ym_dec = debt_security::ANBIMA<decimal128_t>{};
 	const auto ym_bin = debt_security::ANBIMA<double>{};
 
-	auto diff = 0.0; // or should we do the diff as decimal?
+	auto diff = 0_dl;
 	for (auto yield = min_yield; yield <= max_yield; yield += yield_step)
 	{
 		const auto yield_truncate = 4u;
@@ -79,7 +79,7 @@ int main()
 		const auto y_bin = from_percent(trunc_dp(static_cast<double>(yield), yield_truncate));
 		const auto p_bin = ym_bin.price(y_bin, b_bin, q_bin);
 
-		const auto new_diff = abs(static_cast<double>(p_dec) - p_bin);
+		const auto new_diff = abs(p_dec - static_cast<decimal128_t>(p_bin));
 		if(new_diff > diff)
 		{
 			diff = new_diff;
