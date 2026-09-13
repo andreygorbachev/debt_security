@@ -76,7 +76,7 @@ int main()
 		const auto y_dec = from_percent(trunc_dp(y, yield_truncate));
 		const auto p_dec = ym_dec.price(y_dec, b_dec, q_dec);
 
-		const auto y_bin = from_percent(trunc_dp(static_cast<double>(y), yield_truncate));
+		const auto y_bin = from_percent(trunc_dp(static_cast<double>(y), yield_truncate)); // this truncation does all the damage
 		const auto p_bin = ym_bin.price(y_bin, b_bin, q_bin);
 
 		const auto new_diff = abs(p_dec - static_cast<decimal128_t>(p_bin));
