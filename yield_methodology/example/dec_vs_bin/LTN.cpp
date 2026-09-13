@@ -69,14 +69,14 @@ int main()
 	const auto ym_bin = debt_security::ANBIMA<double>{};
 
 	auto diff = 0_dl;
-	for (auto yield = min_yield; yield <= max_yield; yield += yield_step)
+	for (auto y = min_yield; y <= max_yield; y += yield_step)
 	{
-		const auto yield_truncate = 4u;
+		constexpr auto yield_truncate = 4u;
 
-		const auto y_dec = from_percent(trunc_dp(yield, yield_truncate));
+		const auto y_dec = from_percent(trunc_dp(y, yield_truncate));
 		const auto p_dec = ym_dec.price(y_dec, b_dec, q_dec);
 
-		const auto y_bin = from_percent(trunc_dp(static_cast<double>(yield), yield_truncate));
+		const auto y_bin = from_percent(trunc_dp(static_cast<double>(y), yield_truncate));
 		const auto p_bin = ym_bin.price(y_bin, b_bin, q_bin);
 
 		const auto new_diff = abs(p_dec - static_cast<decimal128_t>(p_bin));
@@ -86,7 +86,7 @@ int main()
 
 			cout
 				<< setprecision(numeric_limits<double>::max_digits10)
-				<< "New largest diff: " << diff << " for yield: " << yield
+				<< "New largest diff: " << diff << " for yield: " << y
 				<< ", Price (decimal): " << p_dec << ", Price (binary): " << p_bin << endl;
 		}
 	}
