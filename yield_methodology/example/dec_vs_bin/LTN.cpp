@@ -23,7 +23,7 @@
 #include <chrono>
 #include <iostream>
 #include <iomanip>
-#include <cstdlib>
+#include <limits>
 
 #include <boost/decimal.hpp>
 
@@ -80,12 +80,12 @@ int main()
 		const auto p_bin = ym_bin.price(y_bin, b_bin, q_bin);
 
 		const auto new_diff = abs(p_dec - static_cast<decimal128_t>(p_bin));
-		if(new_diff > diff)
+		if (new_diff > diff)
 		{
 			diff = new_diff;
 
 			cout
-				<< setprecision(numeric_limits<decimal128_t>::max_digits10)
+				<< setprecision(numeric_limits<double>::max_digits10)
 				<< "New largest diff: " << diff << " for yield: " << yield
 				<< ", Price (decimal): " << p_dec << ", Price (binary): " << p_bin << endl;
 		}
