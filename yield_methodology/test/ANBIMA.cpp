@@ -89,7 +89,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2007y / July / 1d);
-		const auto face = 1'000_dl;
+		const auto face = 1000_dl;
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -153,7 +153,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto frequency = SemiAnnual;
 		const auto coupon = 10_dl;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d);
-		const auto face = 1'000_dl;
+		const auto face = 1000_dl;
 		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,

@@ -56,7 +56,7 @@ int main()
 
 	constexpr auto issue_date = 2008y / May / 21d;
 	constexpr auto maturity_date = 2010y / July / 1d;
-	constexpr auto face = 1'000_dl;
+	constexpr auto face = 1000_dl;
 	const auto b_dec = bill{ issue_date, maturity_date, calendar, face };
 	const auto b_bin = bill{ issue_date, maturity_date, calendar, static_cast<double>(face) };
 

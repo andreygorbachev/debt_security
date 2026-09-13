@@ -52,7 +52,7 @@ int main()
 	const auto& calendar = locate_calendar("America/ANBIMA", 2025y / June / 26d);
 
 	const auto settlement_date = start_date;
-	const auto face = 1'000_dl;
+	const auto face = 1000_dl;
 	const auto truncate = 6u;
 	const auto q = quote{ settlement_date, face, truncate };
 
