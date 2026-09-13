@@ -43,6 +43,7 @@
 using namespace std;
 using namespace std::chrono;
 using namespace boost::decimal;
+using namespace boost::decimal::literals;
 using namespace gregorian;
 using namespace gregorian::util;
 using namespace fin_calendar;
@@ -88,7 +89,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2007y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2010y / July / 1d;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2007y / July / 1d);
-		const auto face = decimal128_t{ 1'000 };
+		const auto face = 1'000_dl;
 		const auto LTN = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -104,9 +105,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		});
 		EXPECT_EQ(bd, 532zu);
 
-		const auto yield = from_percent(decimal128_t{ "14.36" });
+		const auto yield = from_percent(14.36_dl);
 		const auto price = ANBIMA.price(yield, LTN, quote);
-		EXPECT_EQ(price, decimal128_t{ "753.315323" });
+		EXPECT_EQ(price, 753.315323_dl);
 	}
 
 	// where should the BD tests be? (here or in the instruments?)
@@ -150,9 +151,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2008y / January / 1d; // made up?
 		const auto maturity_date = 2014y / January / 1d;
 		const auto frequency = SemiAnnual;
-		const auto coupon = decimal128_t{ 10 };
+		const auto coupon = 10_dl;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2008y / January / 1d);
-		const auto face = decimal128_t{ 1'000 };
+		const auto face = 1'000_dl;
 		const auto round_flows = 5u;
 		const auto NTN_F = debt_security::bond{
 			issue_date,
@@ -170,9 +171,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 
 		const auto ANBIMA = debt_security::ANBIMA<decimal128_t>{};
 
-		const auto yield = from_percent(decimal128_t{ "13.66" });
+		const auto yield = from_percent(13.66_dl);
 		const auto price = ANBIMA.price(yield, NTN_F, quote);
-		EXPECT_EQ(price, decimal128_t{ "903.075616" });
+		EXPECT_EQ(price, 903.075616_dl);
 	}
 
 	TEST(ANBIMA, LFT1)
@@ -210,7 +211,7 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		const auto issue_date = 2000y / July / 1d; // made up (does not matter)
 		const auto maturity_date = 2014y / March / 7d;
 		const auto& calendar = locate_calendar("America/ANBIMA", 2014y / March / 7d);
-		const auto face = decimal128_t{ 100 };
+		const auto face = 100_dl;
 		const auto LFT = debt_security::bill{ issue_date, maturity_date, calendar, face };
 
 		const auto settlement_date = 2008y / May / 21d;
@@ -226,9 +227,9 @@ namespace debt_security // should we mock the ANBIMA calendar?
 		});
 		EXPECT_EQ(bd, 1459zu);
 
-		const auto yield = from_percent(decimal128_t{ "-0.02" });
+		const auto yield = from_percent(-0.02_dl);
 		const auto price = ANBIMA.price(yield, LFT, quote);
-		EXPECT_EQ(price, decimal128_t{ "100.1158" });
+		EXPECT_EQ(price, 100.1158_dl);
 	}
 
 }
