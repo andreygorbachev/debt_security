@@ -65,8 +65,8 @@ int main()
 	const auto q_dec = quote{ settlement_date, face, price_truncate };
 	const auto q_bin = quote{ settlement_date, static_cast<double>(face), price_truncate };
 
-	const auto ym_dec = debt_security::ANBIMA<decimal128_t>{};
-	const auto ym_bin = debt_security::ANBIMA<double>{};
+	const auto ym_dec = ANBIMA<decimal128_t>{};
+	const auto ym_bin = ANBIMA<double>{};
 
 	auto diff = 0_dl;
 	for (auto y = min_yield; y <= max_yield; y += yield_step)
