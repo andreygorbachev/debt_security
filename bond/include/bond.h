@@ -167,7 +167,7 @@ namespace debt_security
 
 
 	template<typename T>
-	auto from_percent(const T& x) -> T // need to think how this should be structured better
+	constexpr auto from_percent(const T& x) noexcept -> T // need to think how this should be structured better
 	{
 		return x / T{ 100 };
 	}
